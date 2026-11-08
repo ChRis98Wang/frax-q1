@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "historical_predecessor_not_current_release_benchmark",
+  "robot": "q1",
+  "source_fps": 30.0,
+  "source_manifest_sha256": "02f9e79f86bca5869af8de1cdd9071a826f7b333fb3f090273e20118dede4e50",
+  "model_sha256": "01f9a625a102892c0b32b163e61cd13671745476b4c274e61093f0668900bf1d",
+  "upstream_commits": {
+    "frax": "f5e87ab59a0b82ba43095e882c1b88c9b0dacf07",
+    "primebot-q1-urdf": "9657817ba375f41b0e5d2b62d8d6b72b757cdf4f",
+    "primebot-gmr": "a7d0682f1bdd10bdb0b11910cf786d86e1423522",
+    "lafan1_source": "94084601bacdf9cc3764b5c73daaeccae6035fac"
+  },
+  "retarget_parameters": {
+    "contact_aware": true,
+    "foot_rotation_weight": 40.0,
+    "foot_position_weight": 200.0,
+    "damping": 30.0,
+    "shoulder_damping": 300.0
+  },
+  "raw_clips": 77,
+  "raw_frames": 496672,
+  "quality_thresholds": {
+    "physical_penetration_m": 0.002,
+    "joint_limit_rad": 0.001,
+    "joint_speed_rad_s": 12.0,
+    "joint_acceleration_rad_s2": 150.0,
+    "stance_slip_m_s": 0.2,
+    "root_target_error_m": 0.08,
+    "foot_target_error_m": 0.06,
+    "min_walking_upright": 0.85,
+    "minimum_span_frames": 90
+  },
+  "heldout_source_clips": [
+    "walk1_subject2",
+    "walk2_subject4"
+  ],
+  "split": {
+    "train": {
+      "source_clips": [
+        "walk1_subject1",
+        "walk1_subject5",
+        "walk2_subject1",
+        "walk2_subject3",
+        "walk3_subject1",
+        "walk3_subject2",
+        "walk3_subject3",
+        "walk3_subject4"
+      ],
+      "spans": 94,
+      "frames": 29618,
+      "csv_bytes": 9868289
+    },
+    "eval": {
+      "source_clips": [
+        "walk1_subject2",
+        "walk2_subject4"
+      ],
+      "spans": 36,
+      "frames": 8147,
+      "csv_bytes": 2711174
+    }
+  },
+  "raw_clips_with_self_penetration_over_2mm": 23,
+  "raw_clips_with_floor_penetration_over_2mm": 0,
+  "all_raw_clips_passed": false,
+  "motions_included": false,
+  "note": "Only declared accepted spans were retained; aggregate counts are not a dynamic-feasibility or hardware certification.",
+  "retarget_backend": "cpu",
+  "cpu_virtual_devices": 8,
+  "gpu_used_for_retargeting": false
+}

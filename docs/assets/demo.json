@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "origin": "original_synthetic",
+  "uses_lafan": false,
+  "generator": "tools/make_demo.py",
+  "generator_sha256": "caca986cd0c2034874ca2e8676f311af7192568e938857f0bf2029b89d717287",
+  "files": {
+    "original_q1_demo.mp4": {
+      "sha256": "4f748498edc82eb5aa05983c8b6d90c78de321b39e8b615988545d3199ffcddc",
+      "size_bytes": 2098100
+    },
+    "original_q1_demo.gif": {
+      "sha256": "0e9ea7b2a3c28060b218b291b8d38af4e09ba2d408cf33cf94609ee6d648c2d8",
+      "size_bytes": 1408335
+    }
+  },
+  "fps": 24,
+  "frames": 576,
+  "duration_seconds": 24.0,
+  "width": 960,
+  "height": 720,
+  "preview": {
+    "fps": 6,
+    "size": [
+      480,
+      360
+    ],
+    "duration_seconds": 24.0
+  },
+  "chapters": [
+    {
+      "start": 0.0,
+      "end": 7.0,
+      "title": "01 / ORIGINAL ANALYTIC JOINT MOTION",
+      "mode": "Programmed continuous replay / 1x source clock"
+    },
+    {
+      "start": 7.0,
+      "end": 13.0,
+      "title": "02 / PROGRAMMED SLOW REPLAY",
+      "mode": "0.25x source clock / same authored trajectory"
+    },
+    {
+      "start": 13.0,
+      "end": 18.0,
+      "title": "03 / PROGRAMMED SINGLE-FRAME ADVANCE",
+      "mode": "One source frame every 0.5 s / no keyboard interaction recorded"
+    },
+    {
+      "start": 18.0,
+      "end": 24.0,
+      "title": "04 / INJECTED COLLISION / DEMO",
+      "mode": "Authored test pose / actual MuJoCo geom-pair contacts"
+    }
+  ],
+  "interaction": "Programmed source-clock and frame scheduling; no keyboard interaction is claimed",
+  "source": "Original analytic sine joint trajectories and deterministic seed-731 arm-pose search authored in the generator",
+  "not_a_retargeting_benchmark": true,
+  "not_a_trained_policy": true,
+  "root_placement": "Each FK pose is vertically placed 3 mm above its lowest physical sole sphere; no dynamics are simulated",
+  "collision_definition": "Actual MuJoCo mj_forward penetrating geom pairs; self and floor separated; no contacts removed",
+  "injected_pose_joint_positions_rad": [
+    -0.09,
+    -0.02,
+    -0.02,
+    0.22,
+    -0.13,
+    0.0,
+    -0.09,
+    0.02,
+    0.02,
+    0.22,
+    -0.13,
+    0.0,
+    0.0,
+    0.0,
+    0.14253351976852668,
+    0.3918324986461829,
+    -0.9682203041793677,
+    0.8605501706159165,
+    0.0,
+    -0.18,
+    0.0,
+    1.4
+  ],
+  "max_injected_self_penetration_mm": 19.87131161190515,
+  "excluded_body_pairs": [
+    [
+      "pelvis",
+      "left_hip_pitch_link"
+    ],
+    [
+      "pelvis",
+      "left_hip_roll_link"
+    ],
+    [
+      "pelvis",
+      "right_hip_pitch_link"
+    ],
+    [
+      "pelvis",
+      "right_hip_roll_link"
+    ],
+    [
+      "pelvis",
+      "waist_roll_link"
+    ],
+    [
+      "pelvis",
+      "torso_link"
+    ],
+    [
+      "left_hip_pitch_link",
+      "left_hip_roll_link"
+    ],
+    [
+      "left_hip_pitch_link",
+      "left_hip_yaw_link"
+    ],
+    [
+      "left_hip_roll_link",
+      "left_hip_yaw_link"
+    ],
+    [
+      "left_hip_roll_link",
+      "left_knee_link"
+    ],
+    [
+      "left_hip_yaw_link",
+      "left_knee_link"
+    ],
+    [
+      "left_hip_yaw_link",
+      "left_ankle_pitch_link"
+    ],
+    [
+      "left_knee_link",
+      "left_ankle_pitch_link"
+    ],
+    [
+      "left_knee_link",
+      "left_ankle_roll_link"
+    ],
+    [
+      "left_ankle_pitch_link",
+      "left_ankle_roll_link"
+    ],
+    [
+      "right_hip_pitch_link",
+      "right_hip_roll_link"
+    ],
+    [
+      "right_hip_pitch_link",
+      "right_hip_yaw_link"
+    ],
+    [
+      "right_hip_roll_link",
+      "right_hip_yaw_link"
+    ],
+    [
+      "right_hip_roll_link",
+      "right_knee_link"
+    ],
+    [
+      "right_hip_yaw_link",
+      "right_knee_link"
+    ],
+    [
+      "right_hip_yaw_link",
+      "right_ankle_pitch_link"
+    ],
+    [
+      "right_knee_link",
+      "right_ankle_pitch_link"
+    ],
+    [
+      "right_knee_link",
+      "right_ankle_roll_link"
+    ],
+    [
+      "right_ankle_pitch_link",
+      "right_ankle_roll_link"
+    ],
+    [
+      "waist_roll_link",
+      "torso_link"
+    ],
+    [
+      "waist_roll_link",
+      "left_shoulder_pitch_link"
+    ],
+    [
+      "waist_roll_link",
+      "right_shoulder_pitch_link"
+    ],
+    [
+      "waist_roll_link",
+      "head_link"
+    ],
+    [
+      "torso_link",
+      "left_shoulder_pitch_link"
+    ],
+    [
+      "torso_link",
+      "left_shoulder_roll_link"
+    ],
+    [
+      "torso_link",
+      "right_shoulder_pitch_link"
+    ],
+    [
+      "torso_link",
+      "right_shoulder_roll_link"
+    ],
+    [
+      "torso_link",
+      "head_link"
+    ],
+    [
+      "left_shoulder_pitch_link",
+      "left_shoulder_roll_link"
+    ],
+    [
+      "left_shoulder_pitch_link",
+      "left_shoulder_yaw_link"
+    ],
+    [
+      "left_shoulder_roll_link",
+      "left_shoulder_yaw_link"
+    ],
+    [
+      "left_shoulder_roll_link",
+      "left_elbow_link"
+    ],
+    [
+      "left_shoulder_yaw_link",
+      "left_elbow_link"
+    ],
+    [
+      "left_shoulder_yaw_link",
+      "left_wrist_yaw_link"
+    ],
+    [
+      "left_elbow_link",
+      "left_wrist_yaw_link"
+    ],
+    [
+      "right_shoulder_pitch_link",
+      "right_shoulder_roll_link"
+    ],
+    [
+      "right_shoulder_pitch_link",
+      "right_shoulder_yaw_link"
+    ],
+    [
+      "right_shoulder_roll_link",
+      "right_shoulder_yaw_link"
+    ],
+    [
+      "right_shoulder_roll_link",
+      "right_elbow_link"
+    ],
+    [
+      "right_shoulder_yaw_link",
+      "right_elbow_link"
+    ],
+    [
+      "right_shoulder_yaw_link",
+      "right_wrist_yaw_link"
+    ],
+    [
+      "right_elbow_link",
+      "right_wrist_yaw_link"
+    ]
+  ],
+  "model_sha256": "1153b09706741e2967b1642fc032acd63e303bc9cdfc0aab936f249194f170ce",
+  "model_dependencies": {
+    "schema_version": 1,
+    "files": {
+      "../primebot-q1-urdf/meshes/head_link.STL": {
+        "sha256": "46e89bdd9cec2ac9832fdb7a7db2c04ac791307a67584a62b14afac8c5c76e68",
+        "size_bytes": 2474734
+      },
+      "../primebot-q1-urdf/meshes/left_ankle_pitch_link.STL": {
+        "sha256": "51b73d20787d9f9c2139e829e17d1d7befaf67d65c20cd40467f22fc0f3e4e92",
+        "size_bytes": 149084
+      },
+      "../primebot-q1-urdf/meshes/left_ankle_roll_link.STL": {
+        "sha256": "3a4c01dfa708f45bb925485040bbb2a286fb74ecfce03d5635b2c5701e35ab04",
+        "size_bytes": 1341584
+      },
+      "../primebot-q1-urdf/meshes/left_elbow_link.STL": {
+        "sha256": "a56a951f45e4af8fa657be3a0e558ae75300adb2c5fc34695307ba1f9b324314",
+        "size_bytes": 3036434
+      },
+      "../primebot-q1-urdf/meshes/left_hip_pitch_link.STL": {
+        "sha256": "5e0d4ec7f6b430537d9a23fd13df2fef95e6d46ced86db6e13d2978a8fb05345",
+        "size_bytes": 361834
+      },
+      "../primebot-q1-urdf/meshes/left_hip_roll_link.STL": {
+        "sha256": "fe2255e995cea72657fe8f7e7c62b9e2d3ecf1abeab40f0ad482752ccf2b43ab",
+        "size_bytes": 564384
+      },
+      "../primebot-q1-urdf/meshes/left_hip_yaw_link.STL": {
+        "sha256": "5bbf6d4e292d5793f40a531967eb876e57dedda774e3b3bc716dbea89d06985c",
+        "size_bytes": 553784
+      },
+      "../primebot-q1-urdf/meshes/left_knee_link.STL": {
+        "sha256": "29bea4221f7e3ffc973715e4a36cebf40b280517419c0bed9e75ece40b82795e",
+        "size_bytes": 548334
+      },
+      "../primebot-q1-urdf/meshes/left_shoulder_pitch_link.STL": {
+        "sha256": "1d033e05dcd5c4a300643ab5c35878b97185d9f271f5b8901adbf1c3dfd1df53",
+        "size_bytes": 555284
+      },
+      "../primebot-q1-urdf/meshes/left_shoulder_roll_link.STL": {
+        "sha256": "55dbe108707fb25f6528bf55cf84edba352cb82fc86110e2bcac5bd1183f884c",
+        "size_bytes": 777184
+      },
+      "../primebot-q1-urdf/meshes/left_shoulder_yaw_link.STL": {
+        "sha256": "447d7f76a2e48fb3118d5eb6eb9a68bd7ce1a4d72ce71ba5c9a313860f79b7cd",
+        "size_bytes": 681884
+      },
+      "../primebot-q1-urdf/meshes/pelvis.STL": {
+        "sha256": "6aded646308edfd9c139e8638f92d78e62396c2035462c217c5e26a23c6c1b1b",
+        "size_bytes": 1136884
+      },
+      "../primebot-q1-urdf/meshes/right_ankle_pitch_link.STL": {
+        "sha256": "a5e04d5ef7c164a9108d5e37ec19e2dfe088b8bcb877312256d019b60f44e0d5",
+        "size_bytes": 95984
+      },
+      "../primebot-q1-urdf/meshes/right_ankle_roll_link.STL": {
+        "sha256": "072c4b056fee37f778e1c018bf883a98caf49cbb543738275e4d2ccd34635506",
+        "size_bytes": 1341584
+      },
+      "../primebot-q1-urdf/meshes/right_elbow_link.STL": {
+        "sha256": "6b27f06854e6256e4ca1d28bd179034913e2dafcebfacef73b8d72658a25d9ac",
+        "size_bytes": 3018684
+      },
+      "../primebot-q1-urdf/meshes/right_hip_pitch_link.STL": {
+        "sha256": "75dc6bc206539cc97e94148f02398030cca116bf1d188cc4edfabccdf64d65c4",
+        "size_bytes": 286334
+      },
+      "../primebot-q1-urdf/meshes/right_hip_roll_link.STL": {
+        "sha256": "40587318fa6392586f05aa5add7d586b6823f56dcf2733ae091a4d69220c2ce0",
+        "size_bytes": 564384
+      },
+      "../primebot-q1-urdf/meshes/right_hip_yaw_link.STL": {
+        "sha256": "47e20a1356a758f3f00e8386309170e081efe3d191622915a997921eea29e384",
+        "size_bytes": 553784
+      },
+      "../primebot-q1-urdf/meshes/right_knee_link.STL": {
+        "sha256": "5729c90f603515b8d4472d369917ffc20c91c7581ae84f4b4389184546febc83",
+        "size_bytes": 595434
+      },
+      "../primebot-q1-urdf/meshes/right_shoulder_pitch_link.STL": {
+        "sha256": "e94308ba1ea3bf092af87df26ccaaae13dcbef1098ce5829d3bd01f9d17a9095",
+        "size_bytes": 561884
+      },
+      "../primebot-q1-urdf/meshes/right_shoulder_roll_link.STL": {
+        "sha256": "b67b9e4b49c73d1c1ecf4fd106493fed266fbd1ac60d0c0c68b16c5f2f174b03",
+        "size_bytes": 790784
+      },
+      "../primebot-q1-urdf/meshes/right_shoulder_yaw_link.STL": {
+        "sha256": "b7696cc9d2ffe049896f88123d9daf03424ca35f2c9b204fd6cc11f9cea0d7d9",
+        "size_bytes": 681884
+      },
+      "../primebot-q1-urdf/meshes/torso_link.STL": {
+        "sha256": "15a47cf9b24422536015dfd6f170c93f7bbbbaee2be5062390390e45d360b76a",
+        "size_bytes": 4780584
+      },
+      "../primebot-q1-urdf/meshes/waist_roll_link.STL": {
+        "sha256": "67b5abf2a19a41d4b668a1e3717ca0534c66b7ddd9089a23fbfa1c9f0e1cf682",
+        "size_bytes": 8684
+      }
+    }
+  },
+  "model_upstream": {
+    "repository": "https://github.com/PrimebotTech/primebot-q1-urdf.git",
+    "revision": "9657817ba375f41b0e5d2b62d8d6b72b757cdf4f"
+  },
+  "source_credits": [
+    {
+      "name": "PrimebotTech Q1 robot geometry",
+      "repository": "https://github.com/PrimebotTech/primebot-q1-urdf.git",
+      "revision": "9657817ba375f41b0e5d2b62d8d6b72b757cdf4f"
+    },
+    {
+      "name": "MuJoCo",
+      "repository": "https://github.com/google-deepmind/mujoco",
+      "version": "4.0.0"
+    }
+  ],
+  "copyright": "Original trajectory, presentation and generator by the frax-q1 contributors. Robot geometry remains copyright its upstream authors; the upstream package declares BSD and does not supply a full license text. No LAFAN motion or adaptation is used or distributed. See THIRD_PARTY_NOTICES.md.",
+  "audio": false
+}

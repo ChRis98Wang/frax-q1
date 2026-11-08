@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "benchmark": "portable_q1_lafan_cpu_smoke",
+  "started_at_utc": "2026-11-08T13:56:10.833322+00:00",
+  "hardware": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 7 270K Plus",
+    "logical_cpu_count": 24,
+    "architecture": "x86_64",
+    "gpu_used": false
+  },
+  "environment": {
+    "python": "3.12.3",
+    "platform": "Linux",
+    "cpu_virtual_devices": 1,
+    "openblas_threads": 1,
+    "omp_threads": 1,
+    "jax_enable_x64": true,
+    "versions": {
+      "q1-frax": "0.1.0",
+      "frax": "0.2.0",
+      "jax": "0.12.0.1",
+      "jaxlib": "0.12.0.1",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "mujoco": "4.0.0"
+    }
+  },
+  "inputs": {
+    "fps": 30.0,
+    "source_clips": [
+      {
+        "name": "walk1_subject2",
+        "frames": 1200,
+        "source_sha256": "d6f910fa34c31e657ecedb4088cf140fdccb61c5a432633345ccf93933dfc083"
+      },
+      {
+        "name": "walk2_subject3",
+        "frames": 1200,
+        "source_sha256": "eeab80eb5ada7811904485aea813ec9e4a0d4c890c11cabadb72e5de672ddf67"
+      }
+    ],
+    "total_frames": 2400,
+    "motion_duration_seconds": 80.0,
+    "maximum_frames_per_clip": 1200,
+    "source_extracted_before_timing": true
+  },
+  "configuration": {
+    "self_collision_avoidance": true,
+    "retarget_parameters": {
+      "contact_aware": true,
+      "contact_swing_margin": 0.015,
+      "foot_rotation_weight": 40.0,
+      "foot_position_weight": 200.0,
+      "damping": 30.0,
+      "shoulder_damping": 300.0,
+      "foot_lift_gain": 0.0,
+      "self_collision_margin": 0.0,
+      "self_collision_gain": 30.0,
+      "self_collision_penalty": 1000000.0,
+      "self_collision_max_rows": 64,
+      "floor_margin": 0.002,
+      "floor_gain": 30.0,
+      "floor_penalty": 1000000.0,
+      "floor_max_rows": 32,
+      "joint_velocity_limit": 12.0
+    },
+    "quality_profile": {
+      "schema_version": 1,
+      "name": "legacy_walk_v1",
+      "profile_version": 1,
+      "quaternion_norm_tolerance": 2e-06,
+      "physical_penetration_m": 0.002,
+      "sphere_penetration_m": 0.002,
+      "joint_limit_rad": 0.001,
+      "joint_speed_rad_s": 12.0,
+      "joint_acceleration_rad_s2": 150.0,
+      "stance_slip_m_s": 0.2,
+      "root_target_error_m": 0.08,
+      "foot_target_error_m": 0.06,
+      "min_walking_upright": 0.85,
+      "min_root_height_m": 0.28,
+      "max_sole_clearance_m": 0.025,
+      "max_shoulder_roll_rad": 0.7,
+      "calibration_seconds": 1.0,
+      "edge_buffer_frames": 2,
+      "minimum_span_seconds": 3.0
+    }
+  },
+  "provenance": {
+    "commits": {
+      "frax": "f5e87ab59a0b82ba43095e882c1b88c9b0dacf07",
+      "primebot-q1-urdf": "9657817ba375f41b0e5d2b62d8d6b72b757cdf4f",
+      "primebot-gmr": "a7d0682f1bdd10bdb0b11910cf786d86e1423522",
+      "lafan1_source": "94084601bacdf9cc3764b5c73daaeccae6035fac"
+    },
+    "model_sha256": "1153b09706741e2967b1642fc032acd63e303bc9cdfc0aab936f249194f170ce",
+    "mapping_sha256": "c9998ecf5c84cdb36b276d2599c25fc2f5326ce3d99b80563da4f6b8583eb83f",
+    "collision_sha256": "1b82f7acd26db52d42cabe102aa5c200c4690e5efd0c713b26efc30bfa6bdae8",
+    "retarget_adapter_sha256": "af4e6f2b214e8b00eafb66a446a53cb6e38a2defe38170df88f3ad161786daf4"
+  },
+  "timing": {
+    "solver_total_seconds_including_compile": 2.249932811002509,
+    "compile_seconds": 1.3645876980008325,
+    "solver_seconds_excluding_reported_compile": 0.8853451130016765,
+    "whole_process_wall_seconds": 4.998363235998113,
+    "solver_frames_per_second_including_compile": 1066.6985201796426,
+    "solver_frames_per_second_excluding_reported_compile": 2710.8073052586615,
+    "whole_process_frames_per_second": 480.1571807977555,
+    "whole_process_scope": "fresh CLI startup, source verification/extraction checks, model generation, BVH load, IK, all-frame QA, NPZ/CSV/manifests; excludes downloading, installing, sealing, and visualization",
+    "solver_scope": "OfflineRetargeter call only; reported JIT compile time included"
+  },
+  "quality": {
+    "physical_check_stride": 1,
+    "walking_span_count": 9,
+    "walking_span_frames": 1795,
+    "maximum_physical_self_penetration_m": 0.0,
+    "raw_frames_all_accepted": false,
+    "note": "Raw clips include rejected calibration/quality frames; only recorded spans are accepted."
+  },
+  "limitations": [
+    "Two truncated source clips; not a full-corpus performance claim.",
+    "One local CPU run; not a hardware comparison or statistical benchmark.",
+    "No learned policy, dynamics execution, or real-robot claim."
+  ]
+}
