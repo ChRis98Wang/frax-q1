@@ -9,6 +9,6 @@ prune artifacts
 prune outputs
 prune output
 prune data
-prune .local-data
+prune .local-data*
 global-exclude __pycache__ *.py[cod] *.npz *.bvh *.stl *.STL *.pt *.mp4 *.gif
-include docs/assets/demo.json docs/assets/original_q1_demo.mp4 docs/assets/original_q1_demo.gif
+include docs/assets/lafan_demo.json docs/assets/lafan_quality.json docs/assets/lafan_q1_dynamic.mp4 docs/assets/lafan_q1_dynamic.gif

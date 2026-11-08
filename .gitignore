@@ -1,5 +1,5 @@
 # Downloaded upstream assets and local motion data are not release content.
-.local-data/
+.local-data*/
 data/
 artifacts/
 outputs/
@@ -35,5 +35,5 @@ id_rsa*
 *.pt
 *.mp4
 *.gif
-!docs/assets/original_q1_demo.mp4
-!docs/assets/original_q1_demo.gif
+!docs/assets/lafan_q1_dynamic.mp4
+!docs/assets/lafan_q1_dynamic.gif

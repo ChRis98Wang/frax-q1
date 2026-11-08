@@ -15,7 +15,7 @@ IGNORED = {".git", ".local-data", "data", "artifacts", "outputs", "output", "log
 ASSET_SUFFIXES = {".bvh", ".npz", ".npy", ".csv", ".stl", ".obj", ".dae", ".pt",
                   ".mp4", ".gif", ".png", ".jpg", ".jpeg", ".zip", ".tar", ".gz"}
 SECRET_NAMES = {"id_rsa", "id_ed25519", "id_ed25519_github", "authorized_keys", "known_hosts", ".env"}
-ORIGINAL_MEDIA = {"docs/assets/original_q1_demo.mp4", "docs/assets/original_q1_demo.gif"}
+DEMO_MEDIA = {"docs/assets/lafan_q1_dynamic.mp4", "docs/assets/lafan_q1_dynamic.gif"}
 PATTERNS = [
     ("private key", re.compile(r"-----BEGIN (?:[A-Z0-9]+ )*PRIVATE KEY-----")),
     ("GitHub access token", re.compile(r"(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})")),
@@ -28,7 +28,7 @@ def candidates(tracked: bool):
         output = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT)
         return [ROOT / name.decode() for name in output.split(b"\0") if name]
     return [p for p in ROOT.rglob("*") if p.is_file() and not any(
-        part in IGNORED or part.startswith(".venv") or part.endswith(".egg-info")
+        part in IGNORED or part.startswith((".venv", ".local-data")) or part.endswith(".egg-info")
         for part in p.relative_to(ROOT).parts)]
 
 
@@ -40,18 +40,40 @@ def audit(paths):
         if path.is_symlink():
             failures.append((str(relative), "symlink is not allowed in source release"))
             continue
-        if relative.as_posix() in ORIGINAL_MEDIA:
+        if relative.as_posix() in DEMO_MEDIA:
             try:
-                provenance = json.loads((ROOT/"docs/assets/demo.json").read_text())
-                valid = (provenance["origin"] == "original_synthetic" and provenance["uses_lafan"] is False
-                         and provenance["generator"] == "tools/make_demo.py"
-                         and provenance["generator_sha256"] == hashlib.sha256((ROOT/"tools/make_demo.py").read_bytes()).hexdigest()
+                provenance = json.loads((ROOT/"docs/assets/lafan_demo.json").read_text())
+                qa_path = ROOT/"docs/assets/lafan_quality.json"
+                quality = json.loads(qa_path.read_text())
+                valid = (provenance["origin"] == "lafan_retargeted" and provenance["uses_lafan"] is True
+                         and provenance["preview"] is False and quality["preview"] is False
+                         and provenance["generator"] == "tools/make_lafan_demo.py"
+                         and provenance["generator_sha256"] == hashlib.sha256((ROOT/"tools/make_lafan_demo.py").read_bytes()).hexdigest()
                          and provenance["files"][path.name]["sha256"] == hashlib.sha256(path.read_bytes()).hexdigest()
-                         and 0 < path.stat().st_size <= 12*1024*1024)
+                         and provenance["files"][path.name]["size_bytes"] == path.stat().st_size
+                         and provenance["quality_report"] == "lafan_quality.json"
+                         and provenance["quality_report_sha256"] == hashlib.sha256(qa_path.read_bytes()).hexdigest()
+                         and quality["pose_edits"] is False
+                         and quality["interpolation_or_repeated_padding"] is False
+                         and all(v == 0 for v in quality["maximum_rendered_penetration_mm"].values())
+                         and 0 < path.stat().st_size <= (20_000_000 if path.suffix == ".mp4" else 12_000_000))
+                sources = provenance["source_clips"]
+                valid = valid and bool(sources) and len(sources) == len(quality["segments"])
+                for source, evidence in zip(sources, quality["segments"]):
+                    report = evidence["report"]
+                    valid = (valid and source["name"] == evidence["name"]
+                             and source["speed"] == 1 and source["fps"] == 30
+                             and 0 <= source["start_frame"] < source["end_frame"]
+                             and all(re.fullmatch(r"[0-9a-f]{64}", source[k]) for k in ("source_bvh_sha256", "retarget_npz_sha256"))
+                             and report["source_sha256"] == source["retarget_npz_sha256"]
+                             and report["model_sha256"] == provenance["model_sha256"]
+                             and report["source_range_half_open"] == [source["start_frame"], source["end_frame"]]
+                             and report["requested_checks_passed"] is True
+                             and report["source_tracking_verified"] is True)
                 if not valid:
-                    raise ValueError("Original media provenance mismatch")
-            except (OSError, ValueError, KeyError):
-                failures.append((str(relative), "original-demo provenance, hash, or size check failed"))
+                    raise ValueError("LAFAN demo provenance or quality mismatch")
+            except (OSError, ValueError, KeyError, TypeError):
+                failures.append((str(relative), "LAFAN-demo provenance, quality, hash, or size check failed"))
             continue
         if path.suffix.lower() in ASSET_SUFFIXES or path.name in SECRET_NAMES or path.suffix in {".pem", ".key"}:
             failures.append((str(relative), "asset, generated data, or credential filename"))

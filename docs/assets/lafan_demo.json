@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "origin": "lafan_retargeted",
+  "uses_lafan": true,
+  "preview": false,
+  "generator": "tools/make_lafan_demo.py",
+  "generator_sha256": "f8769308c031af5913f46e3acab9eddadcc1e84582ee29f1dadc0233c90795a7",
+  "source_verified": true,
+  "files": {
+    "lafan_q1_dynamic.mp4": {
+      "sha256": "b3772a5c34a64c963440fa410c4d2fc877b5197f71b9451f821ed15af516dc2c",
+      "size_bytes": 9142680
+    },
+    "lafan_q1_dynamic.gif": {
+      "sha256": "8a8c7d0f1dd16e8235f79f723409c0c53a24d92f600ee4418232ef53e2dc5e73",
+      "size_bytes": 5314411
+    }
+  },
+  "source_clips": [
+    {
+      "name": "dance2_subject3",
+      "source_bvh_sha256": "5030908e46c4042381d1e8c1297bbda88cf94477906f9eaa07e571854c51b952",
+      "retarget_npz_sha256": "0fde42d2f1c2a15f8f38f21e2c7ff6a7de7d4f20b1870b71e271672bb7a80216",
+      "start_frame": 1786,
+      "end_frame": 2055,
+      "fps": 30,
+      "speed": 1,
+      "duration_seconds": 8.966666666666667
+    },
+    {
+      "name": "jumps1_subject1",
+      "source_bvh_sha256": "877006b961a65fc46f1a3101452831c84f0f45f1065426d5dbc188005452b1fe",
+      "retarget_npz_sha256": "dcccb67a8e1f39e407c43d5ae8a12739d58ab60e823ecbcb4bedca4ade7844e7",
+      "start_frame": 1336,
+      "end_frame": 1577,
+      "fps": 30,
+      "speed": 1,
+      "duration_seconds": 8.033333333333333
+    }
+  ],
+  "fps": 30,
+  "frames": 510,
+  "width": 1280,
+  "height": 720,
+  "duration_seconds": 17.0,
+  "audio": false,
+  "gif": {
+    "nominal_fps": 15,
+    "frames": 255,
+    "width": 640,
+    "height": 360,
+    "duration_seconds": 17.0
+  },
+  "source_quaternion": "wxyz",
+  "pose_processing": "None; original archived qpos, exact source ordering, 1x speed, no repeated padding",
+  "model_sha256": "6485c02d1903dfa0785a7e386aa208ca4701d016d907153531ec86def0a98f41",
+  "model_dependencies": {
+    "schema_version": 1,
+    "files": {
+      "../primebot-q1-urdf/meshes/head_link.STL": {
+        "sha256": "46e89bdd9cec2ac9832fdb7a7db2c04ac791307a67584a62b14afac8c5c76e68",
+        "size_bytes": 2474734
+      },
+      "../primebot-q1-urdf/meshes/left_ankle_pitch_link.STL": {
+        "sha256": "51b73d20787d9f9c2139e829e17d1d7befaf67d65c20cd40467f22fc0f3e4e92",
+        "size_bytes": 149084
+      },
+      "../primebot-q1-urdf/meshes/left_ankle_roll_link.STL": {
+        "sha256": "3a4c01dfa708f45bb925485040bbb2a286fb74ecfce03d5635b2c5701e35ab04",
+        "size_bytes": 1341584
+      },
+      "../primebot-q1-urdf/meshes/left_elbow_link.STL": {
+        "sha256": "a56a951f45e4af8fa657be3a0e558ae75300adb2c5fc34695307ba1f9b324314",
+        "size_bytes": 3036434
+      },
+      "../primebot-q1-urdf/meshes/left_hip_pitch_link.STL": {
+        "sha256": "5e0d4ec7f6b430537d9a23fd13df2fef95e6d46ced86db6e13d2978a8fb05345",
+        "size_bytes": 361834
+      },
+      "../primebot-q1-urdf/meshes/left_hip_roll_link.STL": {
+        "sha256": "fe2255e995cea72657fe8f7e7c62b9e2d3ecf1abeab40f0ad482752ccf2b43ab",
+        "size_bytes": 564384
+      },
+      "../primebot-q1-urdf/meshes/left_hip_yaw_link.STL": {
+        "sha256": "5bbf6d4e292d5793f40a531967eb876e57dedda774e3b3bc716dbea89d06985c",
+        "size_bytes": 553784
+      },
+      "../primebot-q1-urdf/meshes/left_knee_link.STL": {
+        "sha256": "29bea4221f7e3ffc973715e4a36cebf40b280517419c0bed9e75ece40b82795e",
+        "size_bytes": 548334
+      },
+      "../primebot-q1-urdf/meshes/left_shoulder_pitch_link.STL": {
+        "sha256": "1d033e05dcd5c4a300643ab5c35878b97185d9f271f5b8901adbf1c3dfd1df53",
+        "size_bytes": 555284
+      },
+      "../primebot-q1-urdf/meshes/left_shoulder_roll_link.STL": {
+        "sha256": "55dbe108707fb25f6528bf55cf84edba352cb82fc86110e2bcac5bd1183f884c",
+        "size_bytes": 777184
+      },
+      "../primebot-q1-urdf/meshes/left_shoulder_yaw_link.STL": {
+        "sha256": "447d7f76a2e48fb3118d5eb6eb9a68bd7ce1a4d72ce71ba5c9a313860f79b7cd",
+        "size_bytes": 681884
+      },
+      "../primebot-q1-urdf/meshes/pelvis.STL": {
+        "sha256": "6aded646308edfd9c139e8638f92d78e62396c2035462c217c5e26a23c6c1b1b",
+        "size_bytes": 1136884
+      },
+      "../primebot-q1-urdf/meshes/right_ankle_pitch_link.STL": {
+        "sha256": "a5e04d5ef7c164a9108d5e37ec19e2dfe088b8bcb877312256d019b60f44e0d5",
+        "size_bytes": 95984
+      },
+      "../primebot-q1-urdf/meshes/right_ankle_roll_link.STL": {
+        "sha256": "072c4b056fee37f778e1c018bf883a98caf49cbb543738275e4d2ccd34635506",
+        "size_bytes": 1341584
+      },
+      "../primebot-q1-urdf/meshes/right_elbow_link.STL": {
+        "sha256": "6b27f06854e6256e4ca1d28bd179034913e2dafcebfacef73b8d72658a25d9ac",
+        "size_bytes": 3018684
+      },
+      "../primebot-q1-urdf/meshes/right_hip_pitch_link.STL": {
+        "sha256": "75dc6bc206539cc97e94148f02398030cca116bf1d188cc4edfabccdf64d65c4",
+        "size_bytes": 286334
+      },
+      "../primebot-q1-urdf/meshes/right_hip_roll_link.STL": {
+        "sha256": "40587318fa6392586f05aa5add7d586b6823f56dcf2733ae091a4d69220c2ce0",
+        "size_bytes": 564384
+      },
+      "../primebot-q1-urdf/meshes/right_hip_yaw_link.STL": {
+        "sha256": "47e20a1356a758f3f00e8386309170e081efe3d191622915a997921eea29e384",
+        "size_bytes": 553784
+      },
+      "../primebot-q1-urdf/meshes/right_knee_link.STL": {
+        "sha256": "5729c90f603515b8d4472d369917ffc20c91c7581ae84f4b4389184546febc83",
+        "size_bytes": 595434
+      },
+      "../primebot-q1-urdf/meshes/right_shoulder_pitch_link.STL": {
+        "sha256": "e94308ba1ea3bf092af87df26ccaaae13dcbef1098ce5829d3bd01f9d17a9095",
+        "size_bytes": 561884
+      },
+      "../primebot-q1-urdf/meshes/right_shoulder_roll_link.STL": {
+        "sha256": "b67b9e4b49c73d1c1ecf4fd106493fed266fbd1ac60d0c0c68b16c5f2f174b03",
+        "size_bytes": 790784
+      },
+      "../primebot-q1-urdf/meshes/right_shoulder_yaw_link.STL": {
+        "sha256": "b7696cc9d2ffe049896f88123d9daf03424ca35f2c9b204fd6cc11f9cea0d7d9",
+        "size_bytes": 681884
+      },
+      "../primebot-q1-urdf/meshes/torso_link.STL": {
+        "sha256": "15a47cf9b24422536015dfd6f170c93f7bbbbaee2be5062390390e45d360b76a",
+        "size_bytes": 4780584
+      },
+      "../primebot-q1-urdf/meshes/waist_roll_link.STL": {
+        "sha256": "67b5abf2a19a41d4b668a1e3717ca0534c66b7ddd9089a23fbfa1c9f0e1cf682",
+        "size_bytes": 8684
+      }
+    }
+  },
+  "quality_report": "lafan_quality.json",
+  "quality_report_sha256": "c7ccdd9d66eaa6bf589514988a27214fcfaacdc395840eb5c86d1ab8f77d22f7",
+  "retarget_provenance": {
+    "commits": {
+      "frax": "f5e87ab59a0b82ba43095e882c1b88c9b0dacf07",
+      "primebot-q1-urdf": "9657817ba375f41b0e5d2b62d8d6b72b757cdf4f",
+      "primebot-gmr": "a7d0682f1bdd10bdb0b11910cf786d86e1423522"
+    },
+    "mapping_sha256": "c9998ecf5c84cdb36b276d2599c25fc2f5326ce3d99b80563da4f6b8583eb83f",
+    "collision_sha256": "43fe620c742cd7fa8cf2820856831e1911137a9cdfa9743da658115f5ca6ec1f",
+    "retarget_parameters": {
+      "contact_aware": true,
+      "contact_swing_margin": 0.015,
+      "foot_rotation_weight": 40.0,
+      "foot_position_weight": 200.0,
+      "damping": 30.0,
+      "shoulder_damping": 300.0,
+      "foot_lift_gain": 0.0,
+      "self_collision_margin": 0.003,
+      "self_collision_gain": 30.0,
+      "self_collision_penalty": 1000000.0,
+      "self_collision_max_rows": 256,
+      "floor_margin": 0.002,
+      "floor_gain": 30.0,
+      "floor_penalty": 1000000.0,
+      "floor_max_rows": 32,
+      "joint_velocity_limit": 12.0
+    },
+    "retarget_adapter_sha256": "b37a7ca14bb693933441c3a246a19f741def06ba8bab48dfff7e51f292781800"
+  },
+  "source_credits": {
+    "LAFAN1": {
+      "repository": "https://github.com/ubisoft/ubisoft-laforge-animation-dataset.git",
+      "revision": "94084601bacdf9cc3764b5c73daaeccae6035fac",
+      "license": "CC-BY-NC-ND-4.0"
+    },
+    "Q1": {
+      "repository": "https://github.com/PrimebotTech/primebot-q1-urdf.git",
+      "revision": "9657817ba375f41b0e5d2b62d8d6b72b757cdf4f"
+    }
+  },
+  "not_a_trained_policy": true,
+  "not_a_dynamics_feasibility_certificate": true
+}

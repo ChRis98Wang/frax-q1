@@ -60,6 +60,60 @@ for a fast-moving foot; stance positions/orientations remain source-driven.
     return {"poses":all_poses[:,[all_names.index(b) for b in bones]], "clearance":clearance}
 
 
+
+def physical_self_collision_pairs(model):
+    """All configuration-independent Q1 geom pairs eligible in MuJoCo.
+
+    Mirrors collision selection, not broad-phase proximity: welded bodies,
+    parent filtering, explicit body exclusions and contact bitmasks. Explicit
+    geom pairs bypass parent/bitmask filters, as in MuJoCo. The world is handled
+    separately by FloorConstraint. Geometry approximation remains independent.
+    """
+    flags=int(model.opt.disableflags)
+    if flags & (int(mujoco.mjtDisableBit.mjDSBL_CONTACT)|int(mujoco.mjtDisableBit.mjDSBL_CONSTRAINT)):
+        raise ValueError("Physical contact must be enabled for collision coverage")
+    explicit={tuple(sorted((int(a),int(b)))) for a,b in zip(model.pair_geom1,model.pair_geom2)}
+    excludes={tuple((int(value)>>16,int(value)&65535)) for value in model.exclude_signature}
+    filter_parent=not bool(flags&int(mujoco.mjtDisableBit.mjDSBL_FILTERPARENT))
+    active=[g for g in range(model.ngeom) if model.geom_bodyid[g] and
+            (model.geom_contype[g] or model.geom_conaffinity[g] or any(g in pair for pair in explicit))]
+    pairs=[]
+    for ia,g1 in enumerate(active):
+        for g2 in active[ia+1:]:
+            b1,b2=int(model.geom_bodyid[g1]),int(model.geom_bodyid[g2])
+            if (g1,g2) in explicit:
+                pairs.append((g1,g2));continue
+            if not ((int(model.geom_contype[g1])&int(model.geom_conaffinity[g2])) or
+                    (int(model.geom_contype[g2])&int(model.geom_conaffinity[g1]))):continue
+            w1,w2=int(model.body_weldid[b1]),int(model.body_weldid[b2])
+            if w1==w2:continue
+            p1=int(model.body_weldid[model.body_parentid[w1]])
+            p2=int(model.body_weldid[model.body_parentid[w2]])
+            if filter_parent and w1 and w2 and (w1==p2 or w2==p1):continue
+            if tuple(sorted((b1,b2))) in excludes:continue
+            pairs.append((g1,g2))
+    return tuple(pairs)
+
+
+def _legacy_selected_link_pairs():
+    """Version-1 policy, only for exact read-only replay of legacy sphere files."""
+    pairs = set()
+    def add(a,b):
+        if a != b:
+            pairs.add(tuple(sorted((a,b))))
+    for a,b in product(("hip_yaw", "knee", "ankle_roll"), repeat=2):
+        add(f"left_{a}_link", f"right_{b}_link")
+    for side,other in (("left","right"),("right","left")):
+        arm = f"{side}_elbow_link"  # includes the fixed hand
+        for link in ("pelvis", "torso_link", f"{other}_elbow_link", f"{other}_shoulder_yaw_link"):
+            add(arm,link)
+        for s,part in product((side,other),("hip_pitch","hip_roll","hip_yaw","knee")):
+            add(arm,f"{s}_{part}_link")
+        add(f"{side}_shoulder_yaw_link", "torso_link")
+    return sorted(pairs)
+
+
+
 def collision_model(model, *, write=True):
     """Spherical envelopes of the physical primitive geoms, fixed links merged.
 
@@ -68,12 +122,29 @@ avoidance. Spheres are an IK approximation; MuJoCo validates actual collisions.
 """
     from frax.utils.collision_utils import bubblify_to_mine, link_pairs_to_sc_data
 
+    child = {n:model.body(int(model.jnt_bodyid[model.joint(n).id])).name for n in JOINT_NAMES}
+    if not write:
+        payload=yaml.safe_load(COLLISION.read_text())
+        if (payload.get("schema_version"),payload.get("coverage_policy")) in ((2,"physical_geom_pairs_v2"),(3,"physical_geom_pairs_v3")):
+            sc=tuple(tuple(row) for row in payload["self_collision_pairs"])
+            if len(sc)!=payload["coverage"]["sphere_pair_count"]:
+                raise ValueError("Stored collision pair count differs from collision metadata")
+        elif "schema_version" not in payload and "self_collision_pairs" not in payload:
+            sc=link_pairs_to_sc_data(COLLISION,_legacy_selected_link_pairs(),tol=.002)
+        else:
+            raise ValueError("Unsupported stored Q1 collision coverage policy")
+        return child,bubblify_to_mine(COLLISION,child,"pelvis",True,sc,verbose=False)
+
     data = mujoco.MjData(model)
     mujoco.mj_forward(model, data)
     child = {n: model.body(int(model.jnt_bodyid[model.joint(n).id])).name for n in JOINT_NAMES}
     spheres = {name: [] for name in ["pelvis", *child.values()]}
+    floor_id=model.geom("floor").id
+    def floor_eligible(g):
+        return bool((int(model.geom_contype[g])&int(model.geom_conaffinity[floor_id])) or
+                    (int(model.geom_contype[floor_id])&int(model.geom_conaffinity[g])))
     for g in range(model.ngeom):
-        if not model.geom_contype[g] or model.geom_bodyid[g] == 0:
+        if not (model.geom_contype[g] or model.geom_conaffinity[g]) or model.geom_bodyid[g] == 0:
             continue
         b = int(model.geom_bodyid[g])
         while model.body(b).name not in spheres:
@@ -95,8 +166,8 @@ avoidance. Spheres are an IK approximation; MuJoCo validates actual collisions.
         elif typ == mujoco.mjtGeom.mjGEOM_BOX:
             parts = [(np.zeros(3), np.linalg.norm(size))]
         elif typ == mujoco.mjtGeom.mjGEOM_MESH:
-            # Only head is a collision mesh in the generated model.
-            # Its MuJoCo OBB is represented by three covering spheres.
+            # Three spheres cover the complete MuJoCo mesh OBB, including
+            # head and self-only feet. These are conservative IK envelopes.
             axis = int(size.argmax())
             h = size[axis]
             r = np.linalg.norm(np.delete(size, axis))
@@ -107,28 +178,42 @@ avoidance. Spheres are an IK approximation; MuJoCo validates actual collisions.
         else:
             raise ValueError(f"Unsupported Q1 collision geom {typ}")
         for c, r in parts:
-            spheres[model.body(b).name].append({"center": (origin+rot@c).tolist(), "radius": float(r)})
+            spheres[model.body(b).name].append({"center": (origin+rot@c).tolist(), "radius": float(r),
+                "source_geom":model.geom(g).name,"source_body":model.body(int(model.geom_bodyid[g])).name,
+                "extra_sole_volume":False,"floor_eligible":floor_eligible(g)})
     for side in ("left", "right"):
         for x in (-.03, .01, .05, .09):
-            spheres[f"{side}_ankle_roll_link"].append({"center": [x,0.,-.0191], "radius": .022})
-    if write:
-        COLLISION.parent.mkdir(parents=True, exist_ok=True)
-        COLLISION.write_text(yaml.safe_dump({"collision_spheres": spheres}, sort_keys=False))
-    pairs = set()
-    def add(a,b):
-        if a != b:
-            pairs.add(tuple(sorted((a,b))))
-    for a,b in product(("hip_yaw", "knee", "ankle_roll"), repeat=2):
-        add(f"left_{a}_link", f"right_{b}_link")
-    for side,other in (("left","right"),("right","left")):
-        arm = f"{side}_elbow_link"  # includes the fixed hand
-        for link in ("pelvis", "torso_link", f"{other}_elbow_link", f"{other}_shoulder_yaw_link"):
-            add(arm,link)
-        for s,part in product((side,other),("hip_pitch","hip_roll","hip_yaw","knee")):
-            add(arm,f"{s}_{part}_link")
-        add(f"{side}_shoulder_yaw_link", "torso_link")
-    sc = link_pairs_to_sc_data(COLLISION, sorted(pairs), tol=.002)
-    return child, bubblify_to_mine(COLLISION, child, "pelvis", True, sc, verbose=False)
+            spheres[f"{side}_ankle_roll_link"].append({"center": [x,0.,-.0191], "radius": .022,
+                "source_geom":f"{side}_ankle_roll_link_foot_0","source_body":f"{side}_ankle_roll_link",
+                "extra_sole_volume":True,"floor_eligible":True})
+    allowed=set(physical_self_collision_pairs(model))
+    flat=[(link,i,sphere) for link,entries in spheres.items() for i,sphere in enumerate(entries)]
+    sc=[]
+    for ia,(link_a,i,a) in enumerate(flat):
+        for link_b,j,b in flat[ia+1:]:
+            ga=model.geom(a["source_geom"]).id;gb=model.geom(b["source_geom"]).id
+            if tuple(sorted((ga,gb))) not in allowed:continue
+            if link_a==link_b:
+                raise ValueError("An active physical collision pair lies within one fixed joint frame")
+            sc.append((link_a,i,link_b,j,.002))
+    physical_covered={tuple(sorted((model.geom(flat_a["source_geom"]).id,model.geom(flat_b["source_geom"]).id)))
+                      for la,i,lb,j,_ in sc
+                      for flat_a,flat_b in [(spheres[la][i],spheres[lb][j])]
+                      if not flat_a["extra_sole_volume"] and not flat_b["extra_sole_volume"]}
+    if physical_covered!=allowed:
+        raise ValueError("Incomplete physical geom pair coverage in Q1 sphere model")
+    payload={"schema_version":3,"coverage_policy":"physical_geom_pairs_v3", "collision_spheres":spheres,
+             "floor_sphere_indices":[k for k,(_,_,sphere) in enumerate(flat) if sphere["floor_eligible"]],
+             "self_collision_pairs":[list(row) for row in sc],
+             "physical_geom_pairs":[[model.geom(a).name,model.geom(b).name] for a,b in sorted(allowed)],
+             "coverage":{"physical_geom_pair_count":len(allowed),"sphere_pair_count":len(sc),
+                         "parent_filter_enabled":not bool(int(model.opt.disableflags)&int(mujoco.mjtDisableBit.mjDSBL_FILTERPARENT)),
+                         "excluded_body_pairs":[[model.body(int(v)>>16).name,model.body(int(v)&65535).name] for v in model.exclude_signature],
+                         "note":"Complete coverage of enabled physical geometry pairs; spheres and added sole volume remain conservative IK approximations, not visual mesh certification."}}
+    COLLISION.parent.mkdir(parents=True,exist_ok=True)
+    temporary=COLLISION.with_suffix(COLLISION.suffix+".tmp")
+    temporary.write_text(yaml.safe_dump(payload,sort_keys=False));temporary.replace(COLLISION)
+    return child,bubblify_to_mine(COLLISION,child,"pelvis",True,tuple(sc),verbose=False)
 
 
 def load_q1(*, rebuild=True):
@@ -161,6 +246,11 @@ def load_q1(*, rebuild=True):
                      left_foot_ee_offset=foot, right_foot_ee_offset=foot,
                      joint_ordering=tuple(JOINT_NAMES), floating_base="quaternion",
                      default_configuration=np.r_[0.,0.,.42,1.,0.,0.,0.,DEFAULT_Q], collision_data=collision)
+    stored=yaml.safe_load(COLLISION.read_text())
+    robot.q1_floor_sphere_indices=np.asarray(stored.get("floor_sphere_indices",np.arange(len(robot.flat_collision_radii))),dtype=int)
+    if robot.q1_floor_sphere_indices.ndim!=1 or not len(robot.q1_floor_sphere_indices) or np.any(robot.q1_floor_sphere_indices<0) or np.any(robot.q1_floor_sphere_indices>=len(robot.flat_collision_radii)):
+        raise ValueError("Invalid stored floor-sphere selection")
+    robot.q1_collision_coverage_policy=stored.get("coverage_policy","legacy_selected_pairs_v1")
     np.testing.assert_allclose(robot.actuated_joint_lower_limits, model.jnt_range[1:,0], atol=1e-5)
     np.testing.assert_allclose(robot.actuated_joint_upper_limits, model.jnt_range[1:,1], atol=1e-5)
     return robot, model
@@ -168,8 +258,8 @@ def load_q1(*, rebuild=True):
 
 def make_retargeter(robot, model, self_collision=True, foot_rotation_weight=10.,
                     foot_position_weight=100., damping=10., shoulder_damping=300., foot_lift_gain=0.,
-                    self_collision_margin=0., self_collision_gain=30., self_collision_penalty=1e6,
-                    self_collision_max_rows=64, floor_margin=.002, floor_gain=30.,
+                    self_collision_margin=.003, self_collision_gain=30., self_collision_penalty=1e6,
+                    self_collision_max_rows=512, floor_margin=.002, floor_gain=30.,
                     floor_penalty=1e6, floor_max_rows=32, joint_velocity_limit=12.):
     import jax
     import jax.numpy as jnp
@@ -243,7 +333,8 @@ def make_retargeter(robot, model, self_collision=True, foot_rotation_weight=10.,
     limits = JointLimits(robot, q_min=robot.actuated_joint_lower_limits+.003,
                          q_max=robot.actuated_joint_upper_limits-.003,
                          v_max=np.minimum(robot.actuated_joint_max_velocities, joint_velocity_limit), gain=30.)
-    constraints = [limits, FloorConstraint(robot, max_rows=floor_max_rows, gain=floor_gain,
+    constraints = [limits, FloorConstraint(robot, sphere_idxs=getattr(robot,"q1_floor_sphere_indices",None),
+                                           max_rows=floor_max_rows, gain=floor_gain,
                                            margin=floor_margin,penalty=floor_penalty)]
     if self_collision:
         constraints.append(SelfCollisionConstraint(robot,max_rows=self_collision_max_rows,

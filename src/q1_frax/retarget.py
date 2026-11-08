@@ -15,8 +15,8 @@ DEFAULT_PARAMETERS = {
     "contact_aware": True, "contact_swing_margin": .015,
     "foot_rotation_weight": 40., "foot_position_weight": 200.,
     "damping": 30., "shoulder_damping": 300., "foot_lift_gain": 0.,
-    "self_collision_margin": 0., "self_collision_gain": 30., "self_collision_penalty": 1e6,
-    "self_collision_max_rows": 64, "floor_margin": .002, "floor_gain": 30.,
+    "self_collision_margin": .003, "self_collision_gain": 30., "self_collision_penalty": 1e6,
+    "self_collision_max_rows": 512, "floor_margin": .002, "floor_gain": 30.,
     "floor_penalty": 1e6, "floor_max_rows": 32, "joint_velocity_limit": 12.,
 }
 
@@ -90,6 +90,7 @@ def verify_frax_installation():
 def _quality_evaluator(robot, retargeter):
     import jax
     import jax.numpy as jnp
+    floor_indices=jnp.asarray(getattr(robot,"q1_floor_sphere_indices",range(len(robot.flat_collision_radii))),dtype=jnp.int32)
     @jax.jit
     @jax.vmap
     def metrics(q,source):
@@ -98,7 +99,7 @@ def _quality_evaluator(robot, retargeter):
         ref=retargeter.preprocess(source)
         tfs=robot.joint_to_world_transforms(q)[task.joints]@task.offsets
         error=jnp.linalg.norm(tfs[:,:3,3]-ref["frame_pos"],axis=-1)
-        return jnp.min(pos[:,2]-r),jnp.min(robot.self_collision_distances(q)),error[0],jnp.max(error[jnp.array([3,6])])
+        return jnp.min(pos[floor_indices,2]-r[floor_indices]),jnp.min(robot.self_collision_distances(q)),error[0],jnp.max(error[jnp.array([3,6])])
     return metrics
 
 

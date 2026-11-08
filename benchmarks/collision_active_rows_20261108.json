@@ -1,0 +1,975 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-08",
+  "dataset": "LAFAN1",
+  "runtime": {
+    "requested_platform": "cpu",
+    "jax_backend": "cpu",
+    "jax_enable_x64": true,
+    "devices": [
+      {
+        "id": 0,
+        "platform": "cpu",
+        "kind": "cpu"
+      },
+      {
+        "id": 1,
+        "platform": "cpu",
+        "kind": "cpu"
+      },
+      {
+        "id": 2,
+        "platform": "cpu",
+        "kind": "cpu"
+      },
+      {
+        "id": 3,
+        "platform": "cpu",
+        "kind": "cpu"
+      },
+      {
+        "id": 4,
+        "platform": "cpu",
+        "kind": "cpu"
+      },
+      {
+        "id": 5,
+        "platform": "cpu",
+        "kind": "cpu"
+      },
+      {
+        "id": 6,
+        "platform": "cpu",
+        "kind": "cpu"
+      },
+      {
+        "id": 7,
+        "platform": "cpu",
+        "kind": "cpu"
+      }
+    ],
+    "cpu_virtual_devices": 8,
+    "qp_solver": {
+      "package": "elastiqp",
+      "version": "0.2.1",
+      "ffi_target": "elastiqp_solve",
+      "backend": "cpu"
+    }
+  },
+  "method": "Complete original 30 Hz clips, full-frame MuJoCo physical QA, same v3 model and sources. No interpolation guarantee; full quality also rejects slip, tracking, speed, acceleration, floor and sphere violations. Solver timers include compilation but exclude loading and QA. CPU jobs were serial; these are tuning timings, not repeated performance estimates.",
+  "variants": [
+    {
+      "parameters": {
+        "contact_aware": true,
+        "contact_swing_margin": 0.015,
+        "foot_rotation_weight": 40.0,
+        "foot_position_weight": 200.0,
+        "damping": 30.0,
+        "shoulder_damping": 300.0,
+        "foot_lift_gain": 0.0,
+        "self_collision_margin": 0.0,
+        "self_collision_gain": 30.0,
+        "self_collision_penalty": 1000000.0,
+        "self_collision_max_rows": 64,
+        "floor_margin": 0.002,
+        "floor_gain": 30.0,
+        "floor_penalty": 1000000.0,
+        "floor_max_rows": 32,
+        "joint_velocity_limit": 12.0
+      },
+      "solve_seconds": 5.9963612650026334,
+      "compile_seconds": 1.4988009379958385,
+      "model_sha256": "6485c02d1903dfa0785a7e386aa208ca4701d016d907153531ec86def0a98f41",
+      "model_dependencies": {
+        "schema_version": 1,
+        "files": {
+          "../primebot-q1-urdf/meshes/head_link.STL": {
+            "sha256": "46e89bdd9cec2ac9832fdb7a7db2c04ac791307a67584a62b14afac8c5c76e68",
+            "size_bytes": 2474734
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_pitch_link.STL": {
+            "sha256": "51b73d20787d9f9c2139e829e17d1d7befaf67d65c20cd40467f22fc0f3e4e92",
+            "size_bytes": 149084
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_roll_link.STL": {
+            "sha256": "3a4c01dfa708f45bb925485040bbb2a286fb74ecfce03d5635b2c5701e35ab04",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/left_elbow_link.STL": {
+            "sha256": "a56a951f45e4af8fa657be3a0e558ae75300adb2c5fc34695307ba1f9b324314",
+            "size_bytes": 3036434
+          },
+          "../primebot-q1-urdf/meshes/left_hip_pitch_link.STL": {
+            "sha256": "5e0d4ec7f6b430537d9a23fd13df2fef95e6d46ced86db6e13d2978a8fb05345",
+            "size_bytes": 361834
+          },
+          "../primebot-q1-urdf/meshes/left_hip_roll_link.STL": {
+            "sha256": "fe2255e995cea72657fe8f7e7c62b9e2d3ecf1abeab40f0ad482752ccf2b43ab",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/left_hip_yaw_link.STL": {
+            "sha256": "5bbf6d4e292d5793f40a531967eb876e57dedda774e3b3bc716dbea89d06985c",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/left_knee_link.STL": {
+            "sha256": "29bea4221f7e3ffc973715e4a36cebf40b280517419c0bed9e75ece40b82795e",
+            "size_bytes": 548334
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_pitch_link.STL": {
+            "sha256": "1d033e05dcd5c4a300643ab5c35878b97185d9f271f5b8901adbf1c3dfd1df53",
+            "size_bytes": 555284
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_roll_link.STL": {
+            "sha256": "55dbe108707fb25f6528bf55cf84edba352cb82fc86110e2bcac5bd1183f884c",
+            "size_bytes": 777184
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_yaw_link.STL": {
+            "sha256": "447d7f76a2e48fb3118d5eb6eb9a68bd7ce1a4d72ce71ba5c9a313860f79b7cd",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/pelvis.STL": {
+            "sha256": "6aded646308edfd9c139e8638f92d78e62396c2035462c217c5e26a23c6c1b1b",
+            "size_bytes": 1136884
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_pitch_link.STL": {
+            "sha256": "a5e04d5ef7c164a9108d5e37ec19e2dfe088b8bcb877312256d019b60f44e0d5",
+            "size_bytes": 95984
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_roll_link.STL": {
+            "sha256": "072c4b056fee37f778e1c018bf883a98caf49cbb543738275e4d2ccd34635506",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/right_elbow_link.STL": {
+            "sha256": "6b27f06854e6256e4ca1d28bd179034913e2dafcebfacef73b8d72658a25d9ac",
+            "size_bytes": 3018684
+          },
+          "../primebot-q1-urdf/meshes/right_hip_pitch_link.STL": {
+            "sha256": "75dc6bc206539cc97e94148f02398030cca116bf1d188cc4edfabccdf64d65c4",
+            "size_bytes": 286334
+          },
+          "../primebot-q1-urdf/meshes/right_hip_roll_link.STL": {
+            "sha256": "40587318fa6392586f05aa5add7d586b6823f56dcf2733ae091a4d69220c2ce0",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/right_hip_yaw_link.STL": {
+            "sha256": "47e20a1356a758f3f00e8386309170e081efe3d191622915a997921eea29e384",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/right_knee_link.STL": {
+            "sha256": "5729c90f603515b8d4472d369917ffc20c91c7581ae84f4b4389184546febc83",
+            "size_bytes": 595434
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_pitch_link.STL": {
+            "sha256": "e94308ba1ea3bf092af87df26ccaaae13dcbef1098ce5829d3bd01f9d17a9095",
+            "size_bytes": 561884
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_roll_link.STL": {
+            "sha256": "b67b9e4b49c73d1c1ecf4fd106493fed266fbd1ac60d0c0c68b16c5f2f174b03",
+            "size_bytes": 790784
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_yaw_link.STL": {
+            "sha256": "b7696cc9d2ffe049896f88123d9daf03424ca35f2c9b204fd6cc11f9cea0d7d9",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/torso_link.STL": {
+            "sha256": "15a47cf9b24422536015dfd6f170c93f7bbbbaee2be5062390390e45d360b76a",
+            "size_bytes": 4780584
+          },
+          "../primebot-q1-urdf/meshes/waist_roll_link.STL": {
+            "sha256": "67b5abf2a19a41d4b668a1e3717ca0534c66b7ddd9089a23fbfa1c9f0e1cf682",
+            "size_bytes": 8684
+          }
+        }
+      },
+      "collision_sha256": "43fe620c742cd7fa8cf2820856831e1911137a9cdfa9743da658115f5ca6ec1f",
+      "retarget_adapter_sha256": "b37a7ca14bb693933441c3a246a19f741def06ba8bab48dfff7e51f292781800",
+      "clips": [
+        {
+          "name": "dance2_subject3",
+          "frames": 6771,
+          "source_sha256": "5030908e46c4042381d1e8c1297bbda88cf94477906f9eaa07e571854c51b952",
+          "npz_sha256": "00a8d7ae687c91aa94b63c6cb1615e1610cea0c02525d72b45099d75a7b064bb",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": -0.0024047131203176458,
+          "root_target_error_m": {
+            "p50": 0.01768731930658615,
+            "p95": 0.030976328155097165,
+            "p99": 0.04701144940745816,
+            "max": 0.06760031587540061,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.004321382588800438,
+            "p95": 0.036725745917033925,
+            "p99": 0.04511821332113048,
+            "max": 0.055427828810322925,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 227,
+          "strict_profile": "legacy_walk_v1",
+          "accepted_frames": 6131
+        },
+        {
+          "name": "jumps1_subject1",
+          "frames": 7334,
+          "source_sha256": "877006b961a65fc46f1a3101452831c84f0f45f1065426d5dbc188005452b1fe",
+          "npz_sha256": "40bb2b31ea2491725b9c9b35c2568a11201c8a3d59e54dd04c6b1a6552118a9c",
+          "physical_self_penetration_m": 0.006619223755532453,
+          "min_self_sphere_distance_m": -0.012257469805942387,
+          "root_target_error_m": {
+            "p50": 0.024649507259706667,
+            "p95": 0.0400492080572866,
+            "p99": 0.05336786719036501,
+            "max": 0.08554643456163394,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.01090087779981906,
+            "p95": 0.03504089278005926,
+            "p99": 0.0417454811205028,
+            "max": 0.06298165792111876,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 1,
+          "sphere_negative_frames": 391,
+          "strict_profile": "legacy_walk_v1",
+          "accepted_frames": 6756
+        },
+        {
+          "name": "run1_subject2",
+          "frames": 7135,
+          "source_sha256": "823dbe4f386a8c4a471999381a16cd0bc4d93a39907098442ccda886dcec9c95",
+          "npz_sha256": "b82fb34454bc29587eb724b5d7952f04100257fb5eb186cfea029bcade1968c4",
+          "physical_self_penetration_m": 0.014571848704137044,
+          "min_self_sphere_distance_m": -0.02382120286205882,
+          "root_target_error_m": {
+            "p50": 0.021250045750137607,
+            "p95": 0.04563344377560289,
+            "p99": 0.08266655653466655,
+            "max": 0.11960843694603777,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.0069461453965584145,
+            "p95": 0.04169094118036328,
+            "p99": 0.05518921995794509,
+            "max": 0.11809649270452754,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 1,
+          "sphere_negative_frames": 246,
+          "strict_profile": "legacy_walk_v1",
+          "accepted_frames": 6026
+        }
+      ],
+      "parameters_sha256": "60c7e08a63c11b965b904aec7a299be034c1b764e28904a376e8e04ec6c23545"
+    },
+    {
+      "parameters": {
+        "contact_aware": true,
+        "contact_swing_margin": 0.015,
+        "foot_rotation_weight": 40.0,
+        "foot_position_weight": 200.0,
+        "damping": 30.0,
+        "shoulder_damping": 300.0,
+        "foot_lift_gain": 0.0,
+        "self_collision_margin": 0.003,
+        "self_collision_gain": 30.0,
+        "self_collision_penalty": 1000000.0,
+        "self_collision_max_rows": 128,
+        "floor_margin": 0.002,
+        "floor_gain": 30.0,
+        "floor_penalty": 1000000.0,
+        "floor_max_rows": 32,
+        "joint_velocity_limit": 12.0
+      },
+      "solve_seconds": 6.326644897999358,
+      "compile_seconds": 1.4663862919987878,
+      "model_sha256": "6485c02d1903dfa0785a7e386aa208ca4701d016d907153531ec86def0a98f41",
+      "model_dependencies": {
+        "schema_version": 1,
+        "files": {
+          "../primebot-q1-urdf/meshes/head_link.STL": {
+            "sha256": "46e89bdd9cec2ac9832fdb7a7db2c04ac791307a67584a62b14afac8c5c76e68",
+            "size_bytes": 2474734
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_pitch_link.STL": {
+            "sha256": "51b73d20787d9f9c2139e829e17d1d7befaf67d65c20cd40467f22fc0f3e4e92",
+            "size_bytes": 149084
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_roll_link.STL": {
+            "sha256": "3a4c01dfa708f45bb925485040bbb2a286fb74ecfce03d5635b2c5701e35ab04",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/left_elbow_link.STL": {
+            "sha256": "a56a951f45e4af8fa657be3a0e558ae75300adb2c5fc34695307ba1f9b324314",
+            "size_bytes": 3036434
+          },
+          "../primebot-q1-urdf/meshes/left_hip_pitch_link.STL": {
+            "sha256": "5e0d4ec7f6b430537d9a23fd13df2fef95e6d46ced86db6e13d2978a8fb05345",
+            "size_bytes": 361834
+          },
+          "../primebot-q1-urdf/meshes/left_hip_roll_link.STL": {
+            "sha256": "fe2255e995cea72657fe8f7e7c62b9e2d3ecf1abeab40f0ad482752ccf2b43ab",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/left_hip_yaw_link.STL": {
+            "sha256": "5bbf6d4e292d5793f40a531967eb876e57dedda774e3b3bc716dbea89d06985c",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/left_knee_link.STL": {
+            "sha256": "29bea4221f7e3ffc973715e4a36cebf40b280517419c0bed9e75ece40b82795e",
+            "size_bytes": 548334
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_pitch_link.STL": {
+            "sha256": "1d033e05dcd5c4a300643ab5c35878b97185d9f271f5b8901adbf1c3dfd1df53",
+            "size_bytes": 555284
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_roll_link.STL": {
+            "sha256": "55dbe108707fb25f6528bf55cf84edba352cb82fc86110e2bcac5bd1183f884c",
+            "size_bytes": 777184
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_yaw_link.STL": {
+            "sha256": "447d7f76a2e48fb3118d5eb6eb9a68bd7ce1a4d72ce71ba5c9a313860f79b7cd",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/pelvis.STL": {
+            "sha256": "6aded646308edfd9c139e8638f92d78e62396c2035462c217c5e26a23c6c1b1b",
+            "size_bytes": 1136884
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_pitch_link.STL": {
+            "sha256": "a5e04d5ef7c164a9108d5e37ec19e2dfe088b8bcb877312256d019b60f44e0d5",
+            "size_bytes": 95984
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_roll_link.STL": {
+            "sha256": "072c4b056fee37f778e1c018bf883a98caf49cbb543738275e4d2ccd34635506",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/right_elbow_link.STL": {
+            "sha256": "6b27f06854e6256e4ca1d28bd179034913e2dafcebfacef73b8d72658a25d9ac",
+            "size_bytes": 3018684
+          },
+          "../primebot-q1-urdf/meshes/right_hip_pitch_link.STL": {
+            "sha256": "75dc6bc206539cc97e94148f02398030cca116bf1d188cc4edfabccdf64d65c4",
+            "size_bytes": 286334
+          },
+          "../primebot-q1-urdf/meshes/right_hip_roll_link.STL": {
+            "sha256": "40587318fa6392586f05aa5add7d586b6823f56dcf2733ae091a4d69220c2ce0",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/right_hip_yaw_link.STL": {
+            "sha256": "47e20a1356a758f3f00e8386309170e081efe3d191622915a997921eea29e384",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/right_knee_link.STL": {
+            "sha256": "5729c90f603515b8d4472d369917ffc20c91c7581ae84f4b4389184546febc83",
+            "size_bytes": 595434
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_pitch_link.STL": {
+            "sha256": "e94308ba1ea3bf092af87df26ccaaae13dcbef1098ce5829d3bd01f9d17a9095",
+            "size_bytes": 561884
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_roll_link.STL": {
+            "sha256": "b67b9e4b49c73d1c1ecf4fd106493fed266fbd1ac60d0c0c68b16c5f2f174b03",
+            "size_bytes": 790784
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_yaw_link.STL": {
+            "sha256": "b7696cc9d2ffe049896f88123d9daf03424ca35f2c9b204fd6cc11f9cea0d7d9",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/torso_link.STL": {
+            "sha256": "15a47cf9b24422536015dfd6f170c93f7bbbbaee2be5062390390e45d360b76a",
+            "size_bytes": 4780584
+          },
+          "../primebot-q1-urdf/meshes/waist_roll_link.STL": {
+            "sha256": "67b5abf2a19a41d4b668a1e3717ca0534c66b7ddd9089a23fbfa1c9f0e1cf682",
+            "size_bytes": 8684
+          }
+        }
+      },
+      "collision_sha256": "43fe620c742cd7fa8cf2820856831e1911137a9cdfa9743da658115f5ca6ec1f",
+      "retarget_adapter_sha256": "b37a7ca14bb693933441c3a246a19f741def06ba8bab48dfff7e51f292781800",
+      "clips": [
+        {
+          "name": "dance2_subject3",
+          "frames": 6771,
+          "source_sha256": "5030908e46c4042381d1e8c1297bbda88cf94477906f9eaa07e571854c51b952",
+          "npz_sha256": "0fde42d2f1c2a15f8f38f21e2c7ff6a7de7d4f20b1870b71e271672bb7a80216",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": 0.0006105898186637999,
+          "root_target_error_m": {
+            "p50": 0.017716908302458555,
+            "p95": 0.03106546925249773,
+            "p99": 0.04701235508957014,
+            "max": 0.0696901792931812,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.004504691984633904,
+            "p95": 0.03834959648656934,
+            "p99": 0.0466697825723319,
+            "max": 0.0570594825115661,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 0,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 6087
+        },
+        {
+          "name": "jumps1_subject1",
+          "frames": 7334,
+          "source_sha256": "877006b961a65fc46f1a3101452831c84f0f45f1065426d5dbc188005452b1fe",
+          "npz_sha256": "cb41bee63bbfb7a9e06c83e2596a63405f1a44a9007996592825729696ee1c8e",
+          "physical_self_penetration_m": 0.007037791098125561,
+          "min_self_sphere_distance_m": -0.01241284814289925,
+          "root_target_error_m": {
+            "p50": 0.02467615211238054,
+            "p95": 0.04006002575997756,
+            "p99": 0.05337308314851404,
+            "max": 0.08554627060437155,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.011708436603564108,
+            "p95": 0.036696005293620895,
+            "p99": 0.04335165882668002,
+            "max": 0.06516527779933579,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 1,
+          "sphere_negative_frames": 2,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 6704
+        },
+        {
+          "name": "run1_subject2",
+          "frames": 7135,
+          "source_sha256": "823dbe4f386a8c4a471999381a16cd0bc4d93a39907098442ccda886dcec9c95",
+          "npz_sha256": "59946d837a3ab9d7f09715253a777f9c128b56132a515d83f4edd679f3f715d2",
+          "physical_self_penetration_m": 0.014610111057635152,
+          "min_self_sphere_distance_m": -0.023907389380528492,
+          "root_target_error_m": {
+            "p50": 0.021269694781248755,
+            "p95": 0.04572080532068019,
+            "p99": 0.08261986165551566,
+            "max": 0.11960291545586688,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.007462924214048457,
+            "p95": 0.043852450054606765,
+            "p99": 0.058779802610103515,
+            "max": 0.1200816749700668,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 1,
+          "sphere_negative_frames": 6,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 5939
+        }
+      ],
+      "parameters_sha256": "a5ecc00efd2a17cce0e977926f7e8eb66e45e7f4296509a3668a0a53aec4b19c"
+    },
+    {
+      "parameters": {
+        "contact_aware": true,
+        "contact_swing_margin": 0.015,
+        "foot_rotation_weight": 40.0,
+        "foot_position_weight": 200.0,
+        "damping": 30.0,
+        "shoulder_damping": 300.0,
+        "foot_lift_gain": 0.0,
+        "self_collision_margin": 0.003,
+        "self_collision_gain": 30.0,
+        "self_collision_penalty": 1000000.0,
+        "self_collision_max_rows": 256,
+        "floor_margin": 0.002,
+        "floor_gain": 30.0,
+        "floor_penalty": 1000000.0,
+        "floor_max_rows": 32,
+        "joint_velocity_limit": 12.0
+      },
+      "solve_seconds": 6.631422989004932,
+      "compile_seconds": 1.5446556479946594,
+      "model_sha256": "6485c02d1903dfa0785a7e386aa208ca4701d016d907153531ec86def0a98f41",
+      "model_dependencies": {
+        "schema_version": 1,
+        "files": {
+          "../primebot-q1-urdf/meshes/head_link.STL": {
+            "sha256": "46e89bdd9cec2ac9832fdb7a7db2c04ac791307a67584a62b14afac8c5c76e68",
+            "size_bytes": 2474734
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_pitch_link.STL": {
+            "sha256": "51b73d20787d9f9c2139e829e17d1d7befaf67d65c20cd40467f22fc0f3e4e92",
+            "size_bytes": 149084
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_roll_link.STL": {
+            "sha256": "3a4c01dfa708f45bb925485040bbb2a286fb74ecfce03d5635b2c5701e35ab04",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/left_elbow_link.STL": {
+            "sha256": "a56a951f45e4af8fa657be3a0e558ae75300adb2c5fc34695307ba1f9b324314",
+            "size_bytes": 3036434
+          },
+          "../primebot-q1-urdf/meshes/left_hip_pitch_link.STL": {
+            "sha256": "5e0d4ec7f6b430537d9a23fd13df2fef95e6d46ced86db6e13d2978a8fb05345",
+            "size_bytes": 361834
+          },
+          "../primebot-q1-urdf/meshes/left_hip_roll_link.STL": {
+            "sha256": "fe2255e995cea72657fe8f7e7c62b9e2d3ecf1abeab40f0ad482752ccf2b43ab",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/left_hip_yaw_link.STL": {
+            "sha256": "5bbf6d4e292d5793f40a531967eb876e57dedda774e3b3bc716dbea89d06985c",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/left_knee_link.STL": {
+            "sha256": "29bea4221f7e3ffc973715e4a36cebf40b280517419c0bed9e75ece40b82795e",
+            "size_bytes": 548334
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_pitch_link.STL": {
+            "sha256": "1d033e05dcd5c4a300643ab5c35878b97185d9f271f5b8901adbf1c3dfd1df53",
+            "size_bytes": 555284
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_roll_link.STL": {
+            "sha256": "55dbe108707fb25f6528bf55cf84edba352cb82fc86110e2bcac5bd1183f884c",
+            "size_bytes": 777184
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_yaw_link.STL": {
+            "sha256": "447d7f76a2e48fb3118d5eb6eb9a68bd7ce1a4d72ce71ba5c9a313860f79b7cd",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/pelvis.STL": {
+            "sha256": "6aded646308edfd9c139e8638f92d78e62396c2035462c217c5e26a23c6c1b1b",
+            "size_bytes": 1136884
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_pitch_link.STL": {
+            "sha256": "a5e04d5ef7c164a9108d5e37ec19e2dfe088b8bcb877312256d019b60f44e0d5",
+            "size_bytes": 95984
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_roll_link.STL": {
+            "sha256": "072c4b056fee37f778e1c018bf883a98caf49cbb543738275e4d2ccd34635506",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/right_elbow_link.STL": {
+            "sha256": "6b27f06854e6256e4ca1d28bd179034913e2dafcebfacef73b8d72658a25d9ac",
+            "size_bytes": 3018684
+          },
+          "../primebot-q1-urdf/meshes/right_hip_pitch_link.STL": {
+            "sha256": "75dc6bc206539cc97e94148f02398030cca116bf1d188cc4edfabccdf64d65c4",
+            "size_bytes": 286334
+          },
+          "../primebot-q1-urdf/meshes/right_hip_roll_link.STL": {
+            "sha256": "40587318fa6392586f05aa5add7d586b6823f56dcf2733ae091a4d69220c2ce0",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/right_hip_yaw_link.STL": {
+            "sha256": "47e20a1356a758f3f00e8386309170e081efe3d191622915a997921eea29e384",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/right_knee_link.STL": {
+            "sha256": "5729c90f603515b8d4472d369917ffc20c91c7581ae84f4b4389184546febc83",
+            "size_bytes": 595434
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_pitch_link.STL": {
+            "sha256": "e94308ba1ea3bf092af87df26ccaaae13dcbef1098ce5829d3bd01f9d17a9095",
+            "size_bytes": 561884
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_roll_link.STL": {
+            "sha256": "b67b9e4b49c73d1c1ecf4fd106493fed266fbd1ac60d0c0c68b16c5f2f174b03",
+            "size_bytes": 790784
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_yaw_link.STL": {
+            "sha256": "b7696cc9d2ffe049896f88123d9daf03424ca35f2c9b204fd6cc11f9cea0d7d9",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/torso_link.STL": {
+            "sha256": "15a47cf9b24422536015dfd6f170c93f7bbbbaee2be5062390390e45d360b76a",
+            "size_bytes": 4780584
+          },
+          "../primebot-q1-urdf/meshes/waist_roll_link.STL": {
+            "sha256": "67b5abf2a19a41d4b668a1e3717ca0534c66b7ddd9089a23fbfa1c9f0e1cf682",
+            "size_bytes": 8684
+          }
+        }
+      },
+      "collision_sha256": "43fe620c742cd7fa8cf2820856831e1911137a9cdfa9743da658115f5ca6ec1f",
+      "retarget_adapter_sha256": "b37a7ca14bb693933441c3a246a19f741def06ba8bab48dfff7e51f292781800",
+      "clips": [
+        {
+          "name": "dance2_subject3",
+          "frames": 6771,
+          "source_sha256": "5030908e46c4042381d1e8c1297bbda88cf94477906f9eaa07e571854c51b952",
+          "npz_sha256": "0fde42d2f1c2a15f8f38f21e2c7ff6a7de7d4f20b1870b71e271672bb7a80216",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": 0.0006105898186637999,
+          "root_target_error_m": {
+            "p50": 0.017716908302458555,
+            "p95": 0.03106546925249773,
+            "p99": 0.04701235508957014,
+            "max": 0.0696901792931812,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.004504691984633904,
+            "p95": 0.03834959648656934,
+            "p99": 0.0466697825723319,
+            "max": 0.0570594825115661,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 0,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 6087
+        },
+        {
+          "name": "jumps1_subject1",
+          "frames": 7334,
+          "source_sha256": "877006b961a65fc46f1a3101452831c84f0f45f1065426d5dbc188005452b1fe",
+          "npz_sha256": "dcccb67a8e1f39e407c43d5ae8a12739d58ab60e823ecbcb4bedca4ade7844e7",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": 0.000370649803353525,
+          "root_target_error_m": {
+            "p50": 0.02467615211238054,
+            "p95": 0.04004659690436103,
+            "p99": 0.053373083148513994,
+            "max": 0.08554627060437155,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.011733093217345072,
+            "p95": 0.03670505153187227,
+            "p99": 0.043433223618490786,
+            "max": 0.06516527779933579,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 0,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 6702
+        },
+        {
+          "name": "run1_subject2",
+          "frames": 7135,
+          "source_sha256": "823dbe4f386a8c4a471999381a16cd0bc4d93a39907098442ccda886dcec9c95",
+          "npz_sha256": "ffd585058445f7fe940b33f32863f500f07d8da1b33801e3a1ab54a390919507",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": -0.009486678528638407,
+          "root_target_error_m": {
+            "p50": 0.021272432070605245,
+            "p95": 0.04572066831421588,
+            "p99": 0.08262909216800379,
+            "max": 0.11960291545586678,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.007538300469263951,
+            "p95": 0.04405684496204551,
+            "p99": 0.05932607100003828,
+            "max": 0.1200816749696116,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 2,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 5937
+        }
+      ],
+      "parameters_sha256": "e0254237f78c77024195f89d7d00c158b78081e9a8b573df61c3d35475040d82"
+    },
+    {
+      "parameters": {
+        "contact_aware": true,
+        "contact_swing_margin": 0.015,
+        "foot_rotation_weight": 40.0,
+        "foot_position_weight": 200.0,
+        "damping": 30.0,
+        "shoulder_damping": 300.0,
+        "foot_lift_gain": 0.0,
+        "self_collision_margin": 0.003,
+        "self_collision_gain": 30.0,
+        "self_collision_penalty": 1000000.0,
+        "self_collision_max_rows": 512,
+        "floor_margin": 0.002,
+        "floor_gain": 30.0,
+        "floor_penalty": 1000000.0,
+        "floor_max_rows": 32,
+        "joint_velocity_limit": 12.0
+      },
+      "solve_seconds": 7.986290546999953,
+      "compile_seconds": 1.4890167369958363,
+      "model_sha256": "6485c02d1903dfa0785a7e386aa208ca4701d016d907153531ec86def0a98f41",
+      "model_dependencies": {
+        "schema_version": 1,
+        "files": {
+          "../primebot-q1-urdf/meshes/head_link.STL": {
+            "sha256": "46e89bdd9cec2ac9832fdb7a7db2c04ac791307a67584a62b14afac8c5c76e68",
+            "size_bytes": 2474734
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_pitch_link.STL": {
+            "sha256": "51b73d20787d9f9c2139e829e17d1d7befaf67d65c20cd40467f22fc0f3e4e92",
+            "size_bytes": 149084
+          },
+          "../primebot-q1-urdf/meshes/left_ankle_roll_link.STL": {
+            "sha256": "3a4c01dfa708f45bb925485040bbb2a286fb74ecfce03d5635b2c5701e35ab04",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/left_elbow_link.STL": {
+            "sha256": "a56a951f45e4af8fa657be3a0e558ae75300adb2c5fc34695307ba1f9b324314",
+            "size_bytes": 3036434
+          },
+          "../primebot-q1-urdf/meshes/left_hip_pitch_link.STL": {
+            "sha256": "5e0d4ec7f6b430537d9a23fd13df2fef95e6d46ced86db6e13d2978a8fb05345",
+            "size_bytes": 361834
+          },
+          "../primebot-q1-urdf/meshes/left_hip_roll_link.STL": {
+            "sha256": "fe2255e995cea72657fe8f7e7c62b9e2d3ecf1abeab40f0ad482752ccf2b43ab",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/left_hip_yaw_link.STL": {
+            "sha256": "5bbf6d4e292d5793f40a531967eb876e57dedda774e3b3bc716dbea89d06985c",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/left_knee_link.STL": {
+            "sha256": "29bea4221f7e3ffc973715e4a36cebf40b280517419c0bed9e75ece40b82795e",
+            "size_bytes": 548334
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_pitch_link.STL": {
+            "sha256": "1d033e05dcd5c4a300643ab5c35878b97185d9f271f5b8901adbf1c3dfd1df53",
+            "size_bytes": 555284
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_roll_link.STL": {
+            "sha256": "55dbe108707fb25f6528bf55cf84edba352cb82fc86110e2bcac5bd1183f884c",
+            "size_bytes": 777184
+          },
+          "../primebot-q1-urdf/meshes/left_shoulder_yaw_link.STL": {
+            "sha256": "447d7f76a2e48fb3118d5eb6eb9a68bd7ce1a4d72ce71ba5c9a313860f79b7cd",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/pelvis.STL": {
+            "sha256": "6aded646308edfd9c139e8638f92d78e62396c2035462c217c5e26a23c6c1b1b",
+            "size_bytes": 1136884
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_pitch_link.STL": {
+            "sha256": "a5e04d5ef7c164a9108d5e37ec19e2dfe088b8bcb877312256d019b60f44e0d5",
+            "size_bytes": 95984
+          },
+          "../primebot-q1-urdf/meshes/right_ankle_roll_link.STL": {
+            "sha256": "072c4b056fee37f778e1c018bf883a98caf49cbb543738275e4d2ccd34635506",
+            "size_bytes": 1341584
+          },
+          "../primebot-q1-urdf/meshes/right_elbow_link.STL": {
+            "sha256": "6b27f06854e6256e4ca1d28bd179034913e2dafcebfacef73b8d72658a25d9ac",
+            "size_bytes": 3018684
+          },
+          "../primebot-q1-urdf/meshes/right_hip_pitch_link.STL": {
+            "sha256": "75dc6bc206539cc97e94148f02398030cca116bf1d188cc4edfabccdf64d65c4",
+            "size_bytes": 286334
+          },
+          "../primebot-q1-urdf/meshes/right_hip_roll_link.STL": {
+            "sha256": "40587318fa6392586f05aa5add7d586b6823f56dcf2733ae091a4d69220c2ce0",
+            "size_bytes": 564384
+          },
+          "../primebot-q1-urdf/meshes/right_hip_yaw_link.STL": {
+            "sha256": "47e20a1356a758f3f00e8386309170e081efe3d191622915a997921eea29e384",
+            "size_bytes": 553784
+          },
+          "../primebot-q1-urdf/meshes/right_knee_link.STL": {
+            "sha256": "5729c90f603515b8d4472d369917ffc20c91c7581ae84f4b4389184546febc83",
+            "size_bytes": 595434
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_pitch_link.STL": {
+            "sha256": "e94308ba1ea3bf092af87df26ccaaae13dcbef1098ce5829d3bd01f9d17a9095",
+            "size_bytes": 561884
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_roll_link.STL": {
+            "sha256": "b67b9e4b49c73d1c1ecf4fd106493fed266fbd1ac60d0c0c68b16c5f2f174b03",
+            "size_bytes": 790784
+          },
+          "../primebot-q1-urdf/meshes/right_shoulder_yaw_link.STL": {
+            "sha256": "b7696cc9d2ffe049896f88123d9daf03424ca35f2c9b204fd6cc11f9cea0d7d9",
+            "size_bytes": 681884
+          },
+          "../primebot-q1-urdf/meshes/torso_link.STL": {
+            "sha256": "15a47cf9b24422536015dfd6f170c93f7bbbbaee2be5062390390e45d360b76a",
+            "size_bytes": 4780584
+          },
+          "../primebot-q1-urdf/meshes/waist_roll_link.STL": {
+            "sha256": "67b5abf2a19a41d4b668a1e3717ca0534c66b7ddd9089a23fbfa1c9f0e1cf682",
+            "size_bytes": 8684
+          }
+        }
+      },
+      "collision_sha256": "43fe620c742cd7fa8cf2820856831e1911137a9cdfa9743da658115f5ca6ec1f",
+      "retarget_adapter_sha256": "b37a7ca14bb693933441c3a246a19f741def06ba8bab48dfff7e51f292781800",
+      "clips": [
+        {
+          "name": "dance2_subject3",
+          "frames": 6771,
+          "source_sha256": "5030908e46c4042381d1e8c1297bbda88cf94477906f9eaa07e571854c51b952",
+          "npz_sha256": "0fde42d2f1c2a15f8f38f21e2c7ff6a7de7d4f20b1870b71e271672bb7a80216",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": 0.0006105898186637999,
+          "root_target_error_m": {
+            "p50": 0.017716908302458555,
+            "p95": 0.03106546925249773,
+            "p99": 0.04701235508957014,
+            "max": 0.0696901792931812,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.004504691984633904,
+            "p95": 0.03834959648656934,
+            "p99": 0.0466697825723319,
+            "max": 0.0570594825115661,
+            "count": 6771,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 0,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 6087
+        },
+        {
+          "name": "jumps1_subject1",
+          "frames": 7334,
+          "source_sha256": "877006b961a65fc46f1a3101452831c84f0f45f1065426d5dbc188005452b1fe",
+          "npz_sha256": "5dc2203f98ef0414f2a2ee4dc60aa69b21bba4113699cb298c85d4b9458e5606",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": 0.000370649803353525,
+          "root_target_error_m": {
+            "p50": 0.02467615211238054,
+            "p95": 0.04004659690436103,
+            "p99": 0.05337308314851395,
+            "max": 0.08554627060437155,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.011733093217345072,
+            "p95": 0.03670505153187227,
+            "p99": 0.04343322361849073,
+            "max": 0.06516527779933579,
+            "count": 7334,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 0,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 6702
+        },
+        {
+          "name": "run1_subject2",
+          "frames": 7135,
+          "source_sha256": "823dbe4f386a8c4a471999381a16cd0bc4d93a39907098442ccda886dcec9c95",
+          "npz_sha256": "3412d57c9f343164ddaa2424fdd6f5da39adffe804af4283cc0f8c0abd8abf73",
+          "physical_self_penetration_m": 0.0,
+          "min_self_sphere_distance_m": -0.0018713300197255502,
+          "root_target_error_m": {
+            "p50": 0.02127944760325156,
+            "p95": 0.04566786904197749,
+            "p99": 0.08262908890547496,
+            "max": 0.11960291545586682,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "foot_target_error_m": {
+            "p50": 0.007542560633524511,
+            "p95": 0.044149229825670905,
+            "p99": 0.05932607100003826,
+            "max": 0.12008167496961156,
+            "count": 7135,
+            "nonfinite_count": 0
+          },
+          "physical_self_penetrating_frames": 0,
+          "sphere_negative_frames": 1,
+          "strict_profile": "strict_dynamic_v1",
+          "accepted_frames": 5940
+        }
+      ],
+      "parameters_sha256": "03b4bb1e3cf9aa3efdf2ae0db6223842136a89833147eab1a9ea7dcaea4f6a3c"
+    }
+  ],
+  "active_set_diagnostics": [
+    {
+      "clip": "jumps1_subject1",
+      "frame": 6863,
+      "physical_geom_pair": [
+        "left_hip_yaw_link_collision_1",
+        "left_wrist_yaw_link_collision_0"
+      ],
+      "physical_penetration_m": 0.006619223755532453,
+      "previous_frame_worst_sphere_gap_m": 0.06692977551905224,
+      "previous_frame_distance_rank": 186,
+      "current_worst_sphere_gap_m": -0.012257469805942387,
+      "max_selected_linear_inequality_violation": -2.255140518769849e-16
+    },
+    {
+      "clip": "run1_subject2",
+      "frame": 5765,
+      "physical_geom_pair": [
+        "right_hip_yaw_link_collision_1",
+        "right_wrist_yaw_link_collision_0"
+      ],
+      "physical_penetration_m": 0.014571848704137044,
+      "previous_frame_worst_sphere_gap_m": 0.07140202709577548,
+      "previous_frame_distance_rank": 151,
+      "current_worst_sphere_gap_m": -0.02382120286205882,
+      "max_selected_linear_inequality_violation": -0.2098972890840015
+    }
+  ],
+  "diagnostic_method": "For baseline q at frame f, compute v=30*robot.difference(q[f-1],q[f]); compare G@v-h for SelfCollisionConstraint.rows(q[f-1],None). Rank current worst sphere pair by previous-frame distance among all 7059 candidates. Frames are zero-based. Source/config/NPZ hashes are in baseline variant.",
+  "selected_release_default": {
+    "self_collision_margin": 0.003,
+    "self_collision_max_rows": 512,
+    "reason": "Rows256 removes sampled physical penetration but still omits a fast foot pair at previous-frame rank338; rows512 covers it. Remaining negative sphere distances are conservatively flagged, not claimed collision-free in all representations."
+  },
+  "additional_active_set_diagnostics": [
+    {
+      "variant_rows": 256,
+      "clip": "run1_subject2",
+      "frame": 4562,
+      "sphere_source_geom_pair": [
+        "left_ankle_roll_link_self_volume",
+        "right_ankle_roll_link_self_volume"
+      ],
+      "previous_frame_worst_sphere_gap_m": 0.09382211600522551,
+      "previous_frame_distance_rank": 338,
+      "current_worst_sphere_gap_m": -0.009486678528638407
+    },
+    {
+      "variant_rows": 512,
+      "clip": "run1_subject2",
+      "frame": 3583,
+      "sphere_source_geom_pair": [
+        "left_ankle_roll_link_self_volume",
+        "right_knee_link_collision_1"
+      ],
+      "previous_frame_worst_sphere_gap_m": 0.019216249758120398,
+      "previous_frame_distance_rank": 4,
+      "current_worst_sphere_gap_m": -0.0018713300197255364
+    }
+  ],
+  "parameters_sha256_encoding": "UTF-8 JSON with sorted keys and separators comma/colon, no whitespace or trailing newline"
+}

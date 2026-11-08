@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "phase": "historical_generation_before_collision_pair_coverage_fix",
+  "physical_model_sha256": "01f9a625a102892c0b32b163e61cd13671745476b4c274e61093f0668900bf1d",
+  "physical_model_current_file_sha256": "01f9a625a102892c0b32b163e61cd13671745476b4c274e61093f0668900bf1d",
+  "source_collision_yaml_sha256": "1b82f7acd26db52d42cabe102aa5c200c4690e5efd0c713b26efc30bfa6bdae8",
+  "historical_retarget_adapter_sha256": "950d6e39edf339926d2b4df7171df43f11c8f9502c5f30a5330f5e0bd877dbf4",
+  "source_manifest_sha256": "02f9e79f86bca5869af8de1cdd9071a826f7b333fb3f090273e20118dede4e50",
+  "retarget_parameters": {
+    "contact_aware": true,
+    "foot_rotation_weight": 40.0,
+    "foot_position_weight": 200.0,
+    "damping": 30.0,
+    "shoulder_damping": 300.0
+  },
+  "reported_historical_collision_settings": {
+    "self_collision_avoidance": true,
+    "self_collision_margin_m": 0.0,
+    "self_collision_gain_s_inv": 30.0,
+    "self_collision_penalty": 1000000.0,
+    "self_collision_max_rows": 64,
+    "sphere_pair_tolerance_m": 0.002
+  },
+  "historical_quality_penetration_tolerance_m": 0.002,
+  "full_archive_clips": 77,
+  "clips_with_any_reported_physical_self_penetration": 25,
+  "clips_with_more_than_2mm_reported_physical_self_penetration": 23,
+  "sampling": "every original source frame; witness poses replayed from actual raw CSV via MuJoCo mj_forward",
+  "raw_archive_is_not_all_accepted": true,
+  "witnesses": [
+    {
+      "source_clip": "walk3_subject4",
+      "source_bvh_sha256": "13451e9a5b310cf5dba1ec976d1219673257bedb483195a2d35e189e7247c81c",
+      "raw_csv_sha256": "e33ff77f8d7dff513c1e1bfafc7abd17b50d526e235b3f648eb0cdfd61726dce",
+      "raw_npz_sha256": "d89c8854d06f5157ad357a465427cd52e0251fbe4a2f6a8999816c8c1bef97f3",
+      "source_frame_zero_based": 5865,
+      "historical_quality_accepted": false,
+      "physical_collisions": [
+        {
+          "body_pair": [
+            "right_ankle_roll_link",
+            "left_hip_pitch_link"
+          ],
+          "signed_distance_m": -0.01375901481082313,
+          "deepest_penetration_m": 0.01375901481082313,
+          "present_in_historical_ik_sphere_pair_whitelist": false
+        }
+      ]
+    },
+    {
+      "source_clip": "fallAndGetUp2_subject3",
+      "source_bvh_sha256": "e66fd460eeff103885dbf2ed54482d43761ba1fd8916a41baa6804e5da58725e",
+      "raw_csv_sha256": "e525ae0f890b25326a08096b6c8413dcb5f7f8e6524fb924cb7c7dec3fcb2a17",
+      "raw_npz_sha256": "4f6beeb59724d6608ed9388615de189820039728c63557ea77734de052976c24",
+      "source_frame_zero_based": 688,
+      "historical_quality_accepted": false,
+      "physical_collisions": [
+        {
+          "body_pair": [
+            "right_ankle_roll_link",
+            "pelvis"
+          ],
+          "signed_distance_m": -0.029910406838100083,
+          "deepest_penetration_m": 0.029910406838100083,
+          "present_in_historical_ik_sphere_pair_whitelist": false
+        }
+      ]
+    },
+    {
+      "source_clip": "obstacles6_subject4",
+      "source_bvh_sha256": "ec8c37cb1bb691789f4f8742d9d16afe6bd5339de6b3d0d3508e14e35635dd86",
+      "raw_csv_sha256": "7dbd1fa3449e5bad94a5af536b060828ab4d1d3d98c1f72bb6b8144a219dcc0e",
+      "raw_npz_sha256": "6ab0d57aace4c336fabe9b15f7b165d2b83193d7323d2a3f41acc68cefbc9a50",
+      "source_frame_zero_based": 993,
+      "historical_quality_accepted": false,
+      "physical_collisions": [
+        {
+          "body_pair": [
+            "left_knee_link",
+            "left_shoulder_yaw_link"
+          ],
+          "signed_distance_m": -0.0268531555273135,
+          "deepest_penetration_m": 0.0268531555273135,
+          "present_in_historical_ik_sphere_pair_whitelist": false
+        },
+        {
+          "body_pair": [
+            "left_ankle_roll_link",
+            "left_wrist_yaw_link"
+          ],
+          "signed_distance_m": -0.0027864042934629667,
+          "deepest_penetration_m": 0.0027864042934629667,
+          "present_in_historical_ik_sphere_pair_whitelist": false
+        }
+      ]
+    }
+  ],
+  "scope_notes": [
+    "Historical raw outputs are preserved, including rejected frames.",
+    "Omitted body pairs have no IK constraint row: increasing a penalty or max_rows does not add them.",
+    "Finite elastic penalty, local velocity linearization and a capped constraint set cannot be interpreted as a hard collision-free trajectory guarantee.",
+    "The generated physical model excludes adjacent and next-adjacent links and ignores disabled visual meshes. Foot collision uses five small sole spheres.",
+    "No old-data pass is transferred to a newly generated motion. New source/output hashes and fresh full-frame/interpolated checks are required."
+  ],
+  "second_root_cause": {
+    "issue": "Five sole points do not cover the solid visible foot volume for self collision",
+    "source_clip": "jumps1_subject1",
+    "source_range_half_open": [
+      1605,
+      1845
+    ],
+    "raw_npz_sha256": "76ee5ba61c0d446bb59d6e56a7c0f04ff88c073325de7c124509bc7ccb6ebbb8",
+    "physical_model_sha256": "01f9a625a102892c0b32b163e61cd13671745476b4c274e61093f0668900bf1d",
+    "original_physical_collision": {
+      "self": {
+        "minimum_signed_distance_m": 0.002626290051838973,
+        "deepest_penetration_m": 0.0,
+        "negative_samples": 0,
+        "worst": {
+          "source_frame": 1784,
+          "interval_fraction": 0.0,
+          "geoms": [
+            "left_ankle_roll_link_foot_1",
+            "right_ankle_roll_link_foot_0"
+          ],
+          "bodies": [
+            "left_ankle_roll_link",
+            "right_ankle_roll_link"
+          ]
+        }
+      },
+      "floor": {
+        "minimum_signed_distance_m": 0.0020124788613882522,
+        "deepest_penetration_m": 0.0,
+        "negative_samples": 0,
+        "worst": {
+          "source_frame": 1615,
+          "interval_fraction": 0.25,
+          "geoms": [
+            "floor",
+            "right_ankle_roll_link_foot_2"
+          ],
+          "bodies": [
+            "world",
+            "right_ankle_roll_link"
+          ]
+        }
+      }
+    },
+    "visual_envelope_diagnostic": {
+      "geometry": "MuJoCo convex envelopes of visible mesh geoms, preserving original body exclusions",
+      "derived_in_memory_model_only": true,
+      "visual_mesh_count": 24,
+      "exact_triangle_surface_intersection_test": false,
+      "continuous_time_guarantee": false,
+      "checked_samples": 957,
+      "collision": {
+        "self": {
+          "minimum_signed_distance_m": -0.014265460804347938,
+          "deepest_penetration_m": 0.014265460804347938,
+          "negative_samples": 202,
+          "worst": {
+            "source_frame": 1779,
+            "interval_fraction": 0.0,
+            "geoms": [
+              "",
+              ""
+            ],
+            "bodies": [
+              "left_ankle_roll_link",
+              "right_ankle_roll_link"
+            ]
+          }
+        },
+        "floor": {
+          "minimum_signed_distance_m": 0.0026898827497373115,
+          "deepest_penetration_m": 0.0,
+          "negative_samples": 0,
+          "worst": {
+            "source_frame": 1616,
+            "interval_fraction": 0.0,
+            "geoms": [
+              "floor",
+              ""
+            ],
+            "bodies": [
+              "world",
+              "right_ankle_roll_link"
+            ]
+          }
+        }
+      },
+      "negative_envelope_distance_detected": true,
+      "note": "Negative convex distance requires investigation and can be conservative for concave surfaces. It is not automatically an exact visible-surface intersection."
+    },
+    "requested_checks_passed": false,
+    "full_diagnostic_report_sha256": "45f72cfeb16ca97b169226c2eb0c0d86b18240d57d69231161da78a41c7ab8ac",
+    "phase": "historical_generation_before_foot_self_collision_volume_fix",
+    "scope": "Convex-envelope diagnostic, not an exact triangle-surface intersection proof; candidate withheld."
+  }
+}

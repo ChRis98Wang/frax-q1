@@ -78,7 +78,7 @@
     "loading_plus_ik_approx_seconds": 32.3,
     "whole_process_wall_seconds": null,
     "whole_process_wall_time_recorded": false,
-    "note": "Historical CPU run: approximately73seconds complete batch based on filesystem timestamps. IK alone14seconds. Revised collision-coverage adapter not yet benchmarked on77clips.",
+    "note": "Historical CPU run: approximately 73 seconds for the complete batch based on filesystem timestamps; IK alone took 14 seconds. The revised collision-coverage adapter has not yet been benchmarked on all 77 clips.",
     "qa_export_phase_seconds": 39.936098,
     "log_birth_utc": "2026-11-08T05:38:48.287300002Z",
     "log_last_write_utc": "2026-11-08T05:40:01.148954047Z",

@@ -77,3 +77,19 @@ process wall timer; it excludes subsequent dataset sealing. Subtracting reported
 compilation from IK gives 5.956174 s, not a separately measured warm run.
 These historical parameters and collision coverage differ from the revised
 adapter, so they are not a speed claim for the current version.
+
+## Full-corpus 0.1.1 defaults
+
+[The new complete run](../benchmarks/full_lafan_v3_20261108.json) retargeted all
+77 clips / 496,672 frames with full pair coverage, self-only foot volumes,
+512 constraint rows and 3 mm extra margin. On the Core Ultra 7 270K Plus with
+eight virtual CPU devices, input loading took 18.5 s, IK took 59.239 s including
+8.135 s compilation, and the fresh complete CLI took 148.064 s. The CLI timer
+includes every-frame QA and export, but not download, installation, sealing or
+rendering. Tests/rendering briefly shared the workstation, so this is a recorded
+production-style batch duration, not an isolated hardware comparison.
+
+This workload/configuration differs from the historical 73 s run. Native
+self-penetration is zero at the original sampled poses, while floor and
+conservative sphere failures remain in the raw archive and are enumerated.
+Timing does not imply that every output frame passed all quality criteria.

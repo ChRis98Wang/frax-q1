@@ -2,4 +2,4 @@
 
 Importing this package does not initialize JAX, access the network, or build assets.
 """
-__version__ = "0.1.0"
+__version__ = "0.1.1"

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.1
+
+- Derive sphere-pair coverage from the complete enabled MuJoCo geom-pair set,
+  including fixed-body ownership; store the policy and pairs in the hashed YAML.
+- Add self-collision foot volumes from the official foot meshes while keeping
+  sole-point floor contacts separate. Share floor-sphere eligibility between IK
+  and independent source replay.
+- Preserve legacy sphere-policy semantics during read-only validation.
+- Add strict dynamic-motion review, interpolated-pose checks, optional visual
+  convex-envelope diagnostics, and reproducible historical collision witnesses.
+- Replace the synthetic README showcase with reviewed LAFAN motion excerpts.
+
 ## 0.1.0
 
 - Independent installable Q1 FRAX adapter with six command-line entry points.

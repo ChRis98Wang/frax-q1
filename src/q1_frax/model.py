@@ -42,6 +42,7 @@ def build_model():
 Visual meshes never collide. Adjacent and next-adjacent links are excluded because
 their simplified collision cylinders overlap at joints. All other body pairs collide.
 """
+    import copy
     import os
     import xml.etree.ElementTree as ET
     import mujoco
@@ -86,6 +87,15 @@ their simplified collision cylinders overlap at joints. All other body pairs col
                 g.set("group", "4")
                 g.set("solref", ".01 1")
         if name.endswith("ankle_roll_link"):
+            # The complete official foot convex hull participates in self
+            # collision only. Bit 4 never matches the floor's masks (1/2).
+            visual_mesh=next(g for g in b.findall("geom") if g.get("type")=="mesh" and g.get("contype")=="0")
+            volume=copy.deepcopy(visual_mesh)
+            volume.set("name",f"{name}_self_volume")
+            volume.set("contype","4");volume.set("conaffinity","6")
+            volume.set("group","4");volume.set("condim","3")
+            volume.set("solref",".01 1");volume.set("density","0")
+            b.append(volume)
             # Official Q1 RL five-point sole geometry, including toe point.
             for i, pos in enumerate(((-.05,.023,-.0391),(-.05,-.023,-.0391),
                                      (.095,.023,-.0391),(.095,-.023,-.0391),(.12,0.,-.035))):

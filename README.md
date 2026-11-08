@@ -11,13 +11,19 @@ required for CPU retargeting and reference playback.
 
 ## Video
 
-[![Original Q1 playback and collision-inspection demo](docs/assets/original_q1_demo.gif)](docs/assets/original_q1_demo.mp4)
+[![LAFAN motion retargeted to Q1](docs/assets/lafan_q1_dynamic.gif)](docs/assets/lafan_q1_dynamic.mp4)
 
-**[Watch the 24-second MP4](docs/assets/original_q1_demo.mp4)** — original synthetic
-joint motion, slow replay, single-frame inspection and an injected collision
-test. This demonstrates the viewer; it is not LAFAN retargeting quality evidence
-or a trained walking policy. Frame scheduling is programmed, not a recording of
-keyboard input. [Source, generator and media hashes](docs/assets/demo.json).
+**[Watch the 17-second LAFAN motion showcase](docs/assets/lafan_q1_dynamic.mp4)** — real
+retargeted motion excerpts at **1× speed / 30 Hz**, with a synchronized second
+view. No injected collisions, pose edits, or repeated-frame padding. This is a
+kinematic reference, not a trained policy. The excerpts are selected ranges, not
+a claim that every frame of the complete source clips passed. The video records
+the reviewed 256-row / 3 mm experiment; the release default uses 512 rows.
+
+[Exact source ranges, parameters and hashes](docs/assets/lafan_demo.json) ·
+[Independent quality evidence](docs/assets/lafan_quality.json) ·
+[Reproduce the video](tools/make_lafan_demo.py).
+LAFAN1 motion source: Ubisoft La Forge; [source license and attribution](THIRD_PARTY_NOTICES.md).
 
 ## What is included
 
@@ -25,10 +31,10 @@ keyboard input. [Source, generator and media hashes](docs/assets/demo.json).
 - Batched FRAX IK with configurable floor and self-collision constraints.
 - Real-time reference play with pause, frame inspection, speed control, link names
   and collision markers; offscreen images and video export.
-- Physical geometry checks in addition to FRAX's approximate collision spheres.
+- Physical geometry checks, full enabled-pair coverage and self-collision foot volumes.
 - Per-frame rejection reasons, contiguous accepted spans, source-clip train/eval
   separation, checksums and immutable dataset sealing.
-- Unit tests, a CPU CI workflow, pinned upstream revisions and source-only releases.
+- Unit tests, a CPU CI workflow, pinned upstream revisions and audited release contents.
 
 ```mermaid
 flowchart LR
@@ -81,9 +87,10 @@ q1-frax-setup --with-lafan
 ```
 
 Review [upstream licenses](THIRD_PARTY_NOTICES.md) before downloading or sharing
-data. The source distribution contains no robot meshes, LAFAN motions, generated
-datasets, learned weights, or LAFAN-derived media. The viewer demo uses original
-synthetic joint motion and identifies its source explicitly.
+data. The source distribution contains no robot meshes, source BVH files,
+generated motion arrays or learned weights. The explicitly listed README video
+and GIF are rendered LAFAN excerpts with source attribution and quality
+provenance; they are separate from the MIT adapter-code license.
 
 ## Retarget, inspect, accept
 
@@ -97,8 +104,10 @@ q1-frax-retarget --pattern 'walk2_subject3.bvh' --max-frames 300 \
 Use `--max-frames 1200` for a longer first walking check; a short clip may contain
 only calibration or fail to provide a full three-second accepted span. Settings
 are explicit in [retarget_default.json](configs/retarget_default.json).
-The [collision review preset](configs/retarget_collision_review.json) requests
-extra clearance; it is an experimental comparison, not a certified improvement.
+The current default uses a **3 mm additional collision margin and 512 constraint
+rows**. The [128-row review preset](configs/retarget_collision_review.json) is a
+historical experiment; it does not provide the coverage of the current default.
+[Measured 64/128/256/512-row comparison](benchmarks/collision_active_rows_20261108.json).
 
 Raw output and accepted data have different meanings. A completed solve is not a
 quality pass. Inspect actual link collisions, review the report and rejection
@@ -122,12 +131,38 @@ Play controls: **P / Space** pause, **Left / Right** step one frame,
 
 See the [Python API](docs/API.md), [data format](docs/DATA_FORMAT.md),
 [quality standards](docs/QUALITY.md), [collision semantics](docs/COLLISIONS.md),
+the [collision audit](docs/COLLISION_AUDIT.md),
 the [benchmark protocol](docs/BENCHMARKING.md), and the
 [Chinese quick start](docs/QUICKSTART.zh-CN.md). Playback never hides bad
 frames by labeling a raw archive as accepted data. Kinematic playback assigns
 poses and computes geometry; it does not step dynamics or run a policy.
 
 ## Quality evidence
+
+The **0.1.1 default** (full physical pair coverage, foot self-collision volumes,
+512 rows, 3 mm extra margin) was rerun on **all 77 clips / 496,672 frames at 30 Hz**.
+The [complete run report](benchmarks/full_lafan_v3_20261108.json) records:
+
+| CPU: Core Ultra 7 270K Plus, 8 virtual devices | Time | Throughput |
+|---|---:|---:|
+| BVH loading | 18.5 s | — |
+| IK including cold compilation | 59.24 s (8.14 s JIT) | 8,384 frames/s |
+| Full CLI including loading, IK, every-frame QA and export | **148.06 s (2 min 28 s)** | **3,354 frames/s** |
+
+This was an actual batch on a shared workstation with some test/render overlap,
+not an isolated or repeated hardware benchmark. It excludes downloading,
+installation, sealing and video rendering. **GPU retargeting remains unsupported
+by the pinned ElastiQP CUDA backend; no GPU FPS is claimed.**
+
+Every original 30 Hz frame was checked: **0 physical self-penetration frames**.
+The raw archive still has 19 floor-penetration frames (maximum 5.692 mm) and 156
+frames with negative conservative sphere separation. These failures remain
+visible and are not an all-quality pass. The current walking filter retained
+50 candidate spans / 8,480 frames; this new archive is not yet split or sealed.
+The README excerpts have separate stricter, interpolated-pose and source checks.
+
+Earlier measurements below use the historical collision model/configuration and
+must not be quoted as the performance of the current stricter default.
 
 The [matched backend test](benchmarks/gpu_cpu_comparison_20261108.json) uses
 2,400 source frames on a Core Ultra 7 270K Plus, float64 and unchanged collision
@@ -167,6 +202,12 @@ full raw archive, 23 clips had at least one frame with physical self-penetration
 over 2 mm. Those raw failure cases are not accepted training motions. These
 numbers describe the predecessor dataset; they do **not** claim that a new
 version, machine or parameter profile reproduces the same acceptance rate.
+
+With the revised foot-volume model and 512-row/3 mm setting, a complete
+**21,240-frame dance/jump/run comparison** had zero measured physical
+self-penetration at the original source frames. This is a geometry result, not
+an all-metric pass; sphere, tracking, slip and interpolated-pose checks remain
+separate. The full 77-clip timing above describes the historical configuration.
 
 Reports distinguish missing evidence from passing evidence. In particular,
 physical collision clearance does not establish source-pose tracking accuracy,

@@ -1,8 +1,10 @@
 # Upstream sources and asset licensing
 
 The adapter code is MIT licensed. This license does not relicense downloaded
-robot models, human motion data, or their derived outputs. No upstream dataset,
-mesh, model archive, or LAFAN-derived animation is included in the source release.
+robot models, human motion data, or their derived outputs. Upstream datasets,
+meshes, model archives and motion arrays are downloaded separately. The README
+includes two explicitly listed rendered LAFAN demonstration files; they are not
+licensed as MIT adapter code.
 
 | Component | Pinned revision | License evidence | Role |
 |---|---|---|---|
@@ -23,3 +25,15 @@ The complete upstream MIT notices are retained in `licenses/`. Any code adapted
 from these projects remains subject to the corresponding notice. Optional
 Python dependencies retain their own distribution licenses. This project is an
 independent Q1 adapter and does not imply endorsement by the upstream authors.
+
+## README demonstration
+
+`docs/assets/lafan_q1_dynamic.mp4` and its GIF preview show selected LAFAN1
+motions retargeted to Q1. Motion attribution: Ubisoft La Forge / LAFAN1;
+robot appearance: Primebot Q1. Exact source commits, clip names, frame ranges,
+source/output hashes and the generating script are recorded in
+[`docs/assets/lafan_demo.json`](docs/assets/lafan_demo.json).
+The LAFAN1 upstream license is CC BY-NC-ND 4.0; the code's MIT license does not
+grant additional rights to these motion-derived media or waive the upstream
+noncommercial/no-derivatives conditions. No source BVH or retargeted motion
+array is bundled with the demonstration.
