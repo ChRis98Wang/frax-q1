@@ -68,5 +68,21 @@
   "note": "Only declared accepted spans were retained; aggregate counts are not a dynamic-feasibility or hardware certification.",
   "retarget_backend": "cpu",
   "cpu_virtual_devices": 8,
-  "gpu_used_for_retargeting": false
+  "gpu_used_for_retargeting": false,
+  "timing": {
+    "source_log_sha256": "c8fe41b82e9f064efac04aea8f58078ec1e6c6cb0115aef0af8fd8acf1330050",
+    "source_log_filename": "frax_final_batch.log",
+    "load_seconds_log_rounded": 18.3,
+    "ik_seconds_including_compile": 13.999899729999925,
+    "compile_seconds": 8.043725796999752,
+    "loading_plus_ik_approx_seconds": 32.3,
+    "whole_process_wall_seconds": null,
+    "whole_process_wall_time_recorded": false,
+    "note": "Historical CPU run: approximately73seconds complete batch based on filesystem timestamps. IK alone14seconds. Revised collision-coverage adapter not yet benchmarked on77clips.",
+    "qa_export_phase_seconds": 39.936098,
+    "log_birth_utc": "2026-11-08T05:38:48.287300002Z",
+    "log_last_write_utc": "2026-11-08T05:40:01.148954047Z",
+    "estimated_complete_batch_wall_seconds": 72.861654045,
+    "estimate_method": "Log file creation to last modification; filesystem timestamps, not a process timer. Consistent with load + IK + manifest QA/export phase. Excludes later sealing."
+  }
 }

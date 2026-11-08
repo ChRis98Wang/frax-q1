@@ -1,0 +1,443 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-11-08T14:24:39.694441+00:00",
+  "hardware": {
+    "cpu_model": "Intel(R) Core(TM) Ultra 7 270K Plus",
+    "logical_cpu_count": 24,
+    "architecture": "x86_64",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5080",
+        "driver_version": "580.178.04",
+        "memory_mib": 16303
+      }
+    ]
+  },
+  "inputs": {
+    "source_clips": [
+      {
+        "name": "walk1_subject2",
+        "frames": 1200,
+        "source_sha256": "d6f910fa34c31e657ecedb4088cf140fdccb61c5a432633345ccf93933dfc083"
+      },
+      {
+        "name": "walk2_subject3",
+        "frames": 1200,
+        "source_sha256": "eeab80eb5ada7811904485aea813ec9e4a0d4c890c11cabadb72e5de672ddf67"
+      }
+    ],
+    "total_frames": 2400,
+    "fps": 30.0,
+    "pattern": "walk[12]_subject[23].bvh",
+    "max_frames_per_clip": 1200,
+    "extracted_BVH_preexisting": true
+  },
+  "configuration_and_provenance": {
+    "commits": {
+      "frax": "f5e87ab59a0b82ba43095e882c1b88c9b0dacf07",
+      "primebot-q1-urdf": "9657817ba375f41b0e5d2b62d8d6b72b757cdf4f",
+      "primebot-gmr": "a7d0682f1bdd10bdb0b11910cf786d86e1423522",
+      "lafan1_source": "94084601bacdf9cc3764b5c73daaeccae6035fac"
+    },
+    "model_sha256": "1153b09706741e2967b1642fc032acd63e303bc9cdfc0aab936f249194f170ce",
+    "model_dependencies": {
+      "schema_version": 1,
+      "files": {
+        "../primebot-q1-urdf/meshes/head_link.STL": {
+          "sha256": "46e89bdd9cec2ac9832fdb7a7db2c04ac791307a67584a62b14afac8c5c76e68",
+          "size_bytes": 2474734
+        },
+        "../primebot-q1-urdf/meshes/left_ankle_pitch_link.STL": {
+          "sha256": "51b73d20787d9f9c2139e829e17d1d7befaf67d65c20cd40467f22fc0f3e4e92",
+          "size_bytes": 149084
+        },
+        "../primebot-q1-urdf/meshes/left_ankle_roll_link.STL": {
+          "sha256": "3a4c01dfa708f45bb925485040bbb2a286fb74ecfce03d5635b2c5701e35ab04",
+          "size_bytes": 1341584
+        },
+        "../primebot-q1-urdf/meshes/left_elbow_link.STL": {
+          "sha256": "a56a951f45e4af8fa657be3a0e558ae75300adb2c5fc34695307ba1f9b324314",
+          "size_bytes": 3036434
+        },
+        "../primebot-q1-urdf/meshes/left_hip_pitch_link.STL": {
+          "sha256": "5e0d4ec7f6b430537d9a23fd13df2fef95e6d46ced86db6e13d2978a8fb05345",
+          "size_bytes": 361834
+        },
+        "../primebot-q1-urdf/meshes/left_hip_roll_link.STL": {
+          "sha256": "fe2255e995cea72657fe8f7e7c62b9e2d3ecf1abeab40f0ad482752ccf2b43ab",
+          "size_bytes": 564384
+        },
+        "../primebot-q1-urdf/meshes/left_hip_yaw_link.STL": {
+          "sha256": "5bbf6d4e292d5793f40a531967eb876e57dedda774e3b3bc716dbea89d06985c",
+          "size_bytes": 553784
+        },
+        "../primebot-q1-urdf/meshes/left_knee_link.STL": {
+          "sha256": "29bea4221f7e3ffc973715e4a36cebf40b280517419c0bed9e75ece40b82795e",
+          "size_bytes": 548334
+        },
+        "../primebot-q1-urdf/meshes/left_shoulder_pitch_link.STL": {
+          "sha256": "1d033e05dcd5c4a300643ab5c35878b97185d9f271f5b8901adbf1c3dfd1df53",
+          "size_bytes": 555284
+        },
+        "../primebot-q1-urdf/meshes/left_shoulder_roll_link.STL": {
+          "sha256": "55dbe108707fb25f6528bf55cf84edba352cb82fc86110e2bcac5bd1183f884c",
+          "size_bytes": 777184
+        },
+        "../primebot-q1-urdf/meshes/left_shoulder_yaw_link.STL": {
+          "sha256": "447d7f76a2e48fb3118d5eb6eb9a68bd7ce1a4d72ce71ba5c9a313860f79b7cd",
+          "size_bytes": 681884
+        },
+        "../primebot-q1-urdf/meshes/pelvis.STL": {
+          "sha256": "6aded646308edfd9c139e8638f92d78e62396c2035462c217c5e26a23c6c1b1b",
+          "size_bytes": 1136884
+        },
+        "../primebot-q1-urdf/meshes/right_ankle_pitch_link.STL": {
+          "sha256": "a5e04d5ef7c164a9108d5e37ec19e2dfe088b8bcb877312256d019b60f44e0d5",
+          "size_bytes": 95984
+        },
+        "../primebot-q1-urdf/meshes/right_ankle_roll_link.STL": {
+          "sha256": "072c4b056fee37f778e1c018bf883a98caf49cbb543738275e4d2ccd34635506",
+          "size_bytes": 1341584
+        },
+        "../primebot-q1-urdf/meshes/right_elbow_link.STL": {
+          "sha256": "6b27f06854e6256e4ca1d28bd179034913e2dafcebfacef73b8d72658a25d9ac",
+          "size_bytes": 3018684
+        },
+        "../primebot-q1-urdf/meshes/right_hip_pitch_link.STL": {
+          "sha256": "75dc6bc206539cc97e94148f02398030cca116bf1d188cc4edfabccdf64d65c4",
+          "size_bytes": 286334
+        },
+        "../primebot-q1-urdf/meshes/right_hip_roll_link.STL": {
+          "sha256": "40587318fa6392586f05aa5add7d586b6823f56dcf2733ae091a4d69220c2ce0",
+          "size_bytes": 564384
+        },
+        "../primebot-q1-urdf/meshes/right_hip_yaw_link.STL": {
+          "sha256": "47e20a1356a758f3f00e8386309170e081efe3d191622915a997921eea29e384",
+          "size_bytes": 553784
+        },
+        "../primebot-q1-urdf/meshes/right_knee_link.STL": {
+          "sha256": "5729c90f603515b8d4472d369917ffc20c91c7581ae84f4b4389184546febc83",
+          "size_bytes": 595434
+        },
+        "../primebot-q1-urdf/meshes/right_shoulder_pitch_link.STL": {
+          "sha256": "e94308ba1ea3bf092af87df26ccaaae13dcbef1098ce5829d3bd01f9d17a9095",
+          "size_bytes": 561884
+        },
+        "../primebot-q1-urdf/meshes/right_shoulder_roll_link.STL": {
+          "sha256": "b67b9e4b49c73d1c1ecf4fd106493fed266fbd1ac60d0c0c68b16c5f2f174b03",
+          "size_bytes": 790784
+        },
+        "../primebot-q1-urdf/meshes/right_shoulder_yaw_link.STL": {
+          "sha256": "b7696cc9d2ffe049896f88123d9daf03424ca35f2c9b204fd6cc11f9cea0d7d9",
+          "size_bytes": 681884
+        },
+        "../primebot-q1-urdf/meshes/torso_link.STL": {
+          "sha256": "15a47cf9b24422536015dfd6f170c93f7bbbbaee2be5062390390e45d360b76a",
+          "size_bytes": 4780584
+        },
+        "../primebot-q1-urdf/meshes/waist_roll_link.STL": {
+          "sha256": "67b5abf2a19a41d4b668a1e3717ca0534c66b7ddd9089a23fbfa1c9f0e1cf682",
+          "size_bytes": 8684
+        }
+      }
+    },
+    "mapping_sha256": "c9998ecf5c84cdb36b276d2599c25fc2f5326ce3d99b80563da4f6b8583eb83f",
+    "collision_sha256": "1b82f7acd26db52d42cabe102aa5c200c4690e5efd0c713b26efc30bfa6bdae8",
+    "retarget_adapter_sha256": "af4e6f2b214e8b00eafb66a446a53cb6e38a2defe38170df88f3ad161786daf4",
+    "retarget_parameters": {
+      "contact_aware": true,
+      "contact_swing_margin": 0.015,
+      "foot_rotation_weight": 40.0,
+      "foot_position_weight": 200.0,
+      "damping": 30.0,
+      "shoulder_damping": 300.0,
+      "foot_lift_gain": 0.0,
+      "self_collision_margin": 0.0,
+      "self_collision_gain": 30.0,
+      "self_collision_penalty": 1000000.0,
+      "self_collision_max_rows": 64,
+      "floor_margin": 0.002,
+      "floor_gain": 30.0,
+      "floor_penalty": 1000000.0,
+      "floor_max_rows": 32,
+      "joint_velocity_limit": 12.0
+    },
+    "self_collision_avoidance": true,
+    "quality_profile": {
+      "schema_version": 1,
+      "name": "legacy_walk_v1",
+      "profile_version": 1,
+      "quaternion_norm_tolerance": 2e-06,
+      "physical_penetration_m": 0.002,
+      "sphere_penetration_m": 0.002,
+      "joint_limit_rad": 0.001,
+      "joint_speed_rad_s": 12.0,
+      "joint_acceleration_rad_s2": 150.0,
+      "stance_slip_m_s": 0.2,
+      "root_target_error_m": 0.08,
+      "foot_target_error_m": 0.06,
+      "min_walking_upright": 0.85,
+      "min_root_height_m": 0.28,
+      "max_sole_clearance_m": 0.025,
+      "max_shoulder_roll_rad": 0.7,
+      "calibration_seconds": 1.0,
+      "edge_buffer_frames": 2,
+      "minimum_span_seconds": 3.0
+    }
+  },
+  "results": {
+    "cpu": {
+      "status": "completed",
+      "environment_probe": {
+        "runtime": {
+          "requested_platform": "cpu",
+          "jax_backend": "cpu",
+          "jax_enable_x64": true,
+          "devices": [
+            {
+              "id": 0,
+              "platform": "cpu",
+              "kind": "cpu"
+            }
+          ],
+          "cpu_virtual_devices": 1
+        },
+        "float64_device_computation_passed": true,
+        "cuda_installation_mode": "local",
+        "versions": {
+          "q1-frax": "0.1.0",
+          "frax": "0.2.0",
+          "elastiqp": "0.2.1",
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1"
+        },
+        "qp_solver": {
+          "package": "elastiqp",
+          "version": "0.2.1",
+          "ffi_target": "elastiqp_solve",
+          "backend": "cpu"
+        },
+        "qp_solver_status": "supported"
+      },
+      "runtime": {
+        "requested_platform": "cpu",
+        "jax_backend": "cpu",
+        "jax_enable_x64": true,
+        "devices": [
+          {
+            "id": 0,
+            "platform": "cpu",
+            "kind": "cpu"
+          }
+        ],
+        "cpu_virtual_devices": 1,
+        "qp_solver": {
+          "package": "elastiqp",
+          "version": "0.2.1",
+          "ffi_target": "elastiqp_solve",
+          "backend": "cpu"
+        }
+      },
+      "retarget_completed": true,
+      "solver_total_seconds_including_compile": 2.27940539100382,
+      "compile_seconds": 1.402914956001041,
+      "whole_cli_wall_seconds": 4.972584980001557,
+      "solver_frames_per_second_including_compile": 1052.9061699477124,
+      "whole_cli_frames_per_second": 482.646351877781,
+      "warm": {
+        "runtime": {
+          "requested_platform": "cpu",
+          "jax_backend": "cpu",
+          "jax_enable_x64": true,
+          "devices": [
+            {
+              "id": 0,
+              "platform": "cpu",
+              "kind": "cpu"
+            }
+          ],
+          "cpu_virtual_devices": 1
+        },
+        "native_cuda_versions": {},
+        "cuda_installation_mode": "local",
+        "python": "3.12.13",
+        "versions": {
+          "q1-frax": "0.1.0",
+          "frax": "0.2.0",
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1",
+          "numpy": "2.5.4",
+          "scipy": "1.18.1",
+          "mujoco": "4.0.0"
+        },
+        "warmup_seconds_including_compile": 2.3007065470010275,
+        "warmup_compile_seconds": 1.3920909939988633,
+        "warm_seconds": [
+          0.8974725540028885,
+          0.8850897629963583,
+          0.8731716219990631
+        ],
+        "warm_median_seconds": 0.8850897629963583,
+        "repeat_max_abs_q_difference": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "synchronization": "OfflineRetargeter np.asarray device-to-host materialization; all return values asserted NumPy arrays",
+        "precision": "JAX float64 enabled; source/solver/settings identical to full CLI; physical QA was performed by the preceding CLI",
+        "warm_frames_per_second": [
+          2674.176485170014,
+          2711.589378093253,
+          2748.600549460568
+        ],
+        "warm_median_frames_per_second": 2711.589378093253
+      },
+      "quality": {
+        "physical_check_stride": 1,
+        "accepted_span_count": 9,
+        "accepted_span_frames": 1795,
+        "max_physical_self_penetration_m": 0.0,
+        "max_physical_floor_penetration_m": 0.0,
+        "source_clips": [
+          {
+            "name": "walk1_subject2",
+            "accepted_frames": 1046,
+            "spans": [
+              {
+                "start": 95,
+                "frames": 98
+              },
+              {
+                "start": 204,
+                "frames": 242
+              },
+              {
+                "start": 548,
+                "frames": 109
+              },
+              {
+                "start": 666,
+                "frames": 173
+              },
+              {
+                "start": 857,
+                "frames": 151
+              },
+              {
+                "start": 1105,
+                "frames": 95
+              }
+            ]
+          },
+          {
+            "name": "walk2_subject3",
+            "accepted_frames": 936,
+            "spans": [
+              {
+                "start": 263,
+                "frames": 124
+              },
+              {
+                "start": 392,
+                "frames": 278
+              },
+              {
+                "start": 675,
+                "frames": 525
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "cuda": {
+      "status": "unsupported_by_locked_qp_backend",
+      "environment_probe": {
+        "runtime": {
+          "requested_platform": "cuda",
+          "jax_backend": "gpu",
+          "jax_enable_x64": true,
+          "devices": [
+            {
+              "id": 0,
+              "platform": "gpu",
+              "kind": "NVIDIA GeForce RTX 5080"
+            }
+          ],
+          "cpu_virtual_devices": null
+        },
+        "float64_device_computation_passed": true,
+        "cuda_installation_mode": "local",
+        "versions": {
+          "q1-frax": "0.1.0",
+          "frax": "0.2.0",
+          "elastiqp": "0.2.1",
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1"
+        },
+        "native_cuda_versions": {
+          "cuda_runtime_get_version": 13000,
+          "cudnn_get_version": 91900,
+          "cublas_get_version": 130100,
+          "cusolver_get_version": 12004
+        },
+        "qp_solver_status": "unsupported",
+        "reason": "ElastiQP 0.2.1 does not provide a CUDA FFI handler for elastiqp_solve. JAX detected the requested GPU, but this locked FRAX QP backend supports CPU retargeting only. Use --platform cpu; no CPU fallback was performed.",
+        "original_ffi_error": "NOT_FOUND: No FFI handler registered for elastiqp_solve on a platform CUDA (canonical cuda)"
+      },
+      "runtime": {
+        "requested_platform": "cuda",
+        "jax_backend": "gpu",
+        "jax_enable_x64": true,
+        "devices": [
+          {
+            "id": 0,
+            "platform": "gpu",
+            "kind": "NVIDIA GeForce RTX 5080"
+          }
+        ],
+        "cpu_virtual_devices": null
+      },
+      "retarget_completed": false,
+      "solver_total_seconds_including_compile": null,
+      "compile_seconds": null,
+      "solver_frames_per_second_including_compile": null,
+      "whole_cli_frames_per_second": null,
+      "warm": null,
+      "quality": null,
+      "failed_preflight_wall_seconds": 0.539429160002328,
+      "returncode": 1,
+      "output_created": false,
+      "reason": "ElastiQP 0.2.1 does not provide a CUDA FFI handler for elastiqp_solve. JAX detected the requested GPU, but this locked FRAX QP backend supports CPU retargeting only. Use --platform cpu; no CPU fallback was performed."
+    }
+  },
+  "cpu_gpu_comparison": {
+    "status": "not_comparable",
+    "reason": "The locked QP backend did not produce a CUDA trajectory; no GPU quality or FPS is claimed."
+  },
+  "protocol": {
+    "full_cli": "Fresh process per platform; includes imports, source checks, model generation, BVH read, IK, every-frame physical/source QA and file export; excludes download/install, capability probe, seal and rendering.",
+    "warm": "Separate process per successful platform: first solve compiles and warms; 3 subsequent solves use the same OfflineRetargeter instance and shapes. GPU-to-host NumPy conversion synchronizes each sample.",
+    "warm_repeats": 3,
+    "precision": "float64 for both; identical constraints, contact-aware targets and QA profile",
+    "cuda_installation_mode": "local",
+    "cuda_local_note": "Local CUDA mode uses CUDA13 ptxas/libdevice and compatible CUDA13/cuDNN/NCCL shared libraries through PATH/LD_LIBRARY_PATH and XLA_FLAGS --xla_gpu_cuda_data_dir. Native libraries are reused read-only; Python environments are separate.",
+    "jax_persistent_compilation_cache_enabled": false,
+    "cpu_devices": 1,
+    "threads": {
+      "OPENBLAS_NUM_THREADS": 1,
+      "OMP_NUM_THREADS": 1
+    },
+    "reproduce": "python tools/benchmark.py --cpu-python .venv-gpu/bin/python --gpu-python .venv-gpu/bin/python --data-dir \"$Q1_FRAX_DATA\" --work-dir .local-data/benchmark-new --output benchmarks/comparison-new.json --warm-repeats 3 --cuda-mode local",
+    "cli_pattern_note": "The declared glob matches the exact source clip names above; do not infer the count from character-class combinations."
+  },
+  "upstream_evidence": {
+    "elastiqp_cpu_ffi": "https://github.com/StanfordASL/elastiqp/blob/v0.2.1/python/elastiqp/jax.py#L61-L63",
+    "frax_qp_call": "https://github.com/StanfordASL/frax/blob/f5e87ab59a0b82ba43095e882c1b88c9b0dacf07/frax/ik/solver.py#L183-L194"
+  },
+  "limitations": [
+    "One machine and two truncated clips, not a full-dataset or cross-hardware benchmark.",
+    "Warm measurements cover IK only; they do not repeat full QA/file export.",
+    "No float32, collision disabling, changed quality threshold, alternate solver, or CPU fallback for CUDA was used."
+  ]
+}

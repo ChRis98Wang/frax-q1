@@ -94,7 +94,7 @@ class PlaybackTest(unittest.TestCase):
 sys.path.insert(0, {str(source)!r})
 class Block(importlib.abc.MetaPathFinder):
  def find_spec(self, fullname, path=None, target=None):
-  if fullname.split('.')[0] in ('torch','supermimic','frax','jax'):
+  if fullname.split('.')[0] in ('torch','supermimic','frax','jax','mujoco'):
    raise RuntimeError('Unexpected playback dependency: '+fullname)
 sys.meta_path.insert(0,Block())
 import q1_frax.play, q1_frax.render, q1_frax.motion_io

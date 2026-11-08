@@ -65,19 +65,13 @@ For the tested Python 3.12 dependency versions, add `-c requirements-lock.txt`
 to the pip install command. Playback alone only needs `.[visualization]`;
 JAX and FRAX are optional until retargeting or source-target replay is requested.
 
-For NVIDIA GPU retargeting on Linux, install the additional CUDA extra:
-
-```bash
-.venv/bin/python -m pip install -c requirements-lock.txt -e '.[retarget,cuda13,visualization,test]'
-q1-frax-retarget --platform cuda --pattern 'walk2_subject3.bvh' \
-  --max-frames 1200 --out outputs/gpu-walk
-```
-
-CUDA 13 requires a compatible NVIDIA driver; see the
-[official JAX installation guide](https://docs.jax.dev/en/latest/installation.html).
-`--platform cpu` is the default. `--devices` selects virtual **CPU** devices and
-is rejected for CUDA. A requested GPU backend fails explicitly if unavailable;
-it never silently reports CPU work as GPU work.
+**Retargeting currently runs on CPU.** We verified CUDA 13 and float64 JAX on
+an RTX 5080, but the pinned `elastiqp==0.2.1` QP solver only registers its FFI
+handler for CPU. A real FRAX CUDA solve fails; installing the `cuda13` extra
+alone does not enable GPU retargeting. `--platform cuda` is a diagnostic option
+and fails explicitly before creating output when the QP backend is unsupported.
+`--devices` selects virtual **CPU** devices, not GPUs.
+See the [backend evidence and timing protocol](docs/BENCHMARKING.md).
 
 The data directory defaults to `~/.cache/q1-frax`; it is separate from installed
 code. Setup retrieves pinned upstream assets. LAFAN is an explicit opt-in download:
@@ -135,15 +129,31 @@ poses and computes geometry; it does not step dynamics or run a policy.
 
 ## Quality evidence
 
-The [CPU smoke timing record](benchmarks/cpu_smoke_20261108.json) measured 2,400
-source frames on a Core Ultra 7 270K Plus: **2.250 s for IK including JIT**
-(1,067 frames/s), and **4.998 s for the complete CLI including QA and export**
-(480 frames/s). This is one short workload, not full-corpus throughput. Matched
-RTX 5080 CPU/GPU measurements are being validated and will be added separately;
-no GPU speed is inferred from these CPU numbers.
+The [matched backend test](benchmarks/gpu_cpu_comparison_20261108.json) uses
+2,400 source frames on a Core Ultra 7 270K Plus, float64 and unchanged collision
+settings. This is a short workload, not full-corpus throughput. The RTX 5080
+passes the CUDA/JAX device test but cannot complete FRAX IK with the pinned
+CPU-only QP backend, so **GPU retargeting FPS is unavailable**.
+
+| Hardware / backend | First IK call, including JIT | Warm IK, 3-run median | Full CLI, including QA/export |
+|---|---:|---:|---:|
+| Core Ultra 7 270K Plus / CPU, 1 virtual device | 2.279 s / 1,053 fps | 0.885 s / 2,712 fps | 4.973 s / 483 fps |
+| RTX 5080 / CUDA 13 | Unsupported QP backend | No valid FPS | Did not complete |
+
+JAX device availability is not evidence that the complete IK solver runs on GPU.
+The timings above precede the collision-coverage revision; see the recorded
+adapter/configuration hashes. An [earlier CPU smoke run](benchmarks/cpu_smoke_20261108.json)
+is retained separately, not mixed into the three-run warm measurement.
 
 The original local Q1 adaptation processed **77 clips / 496,672 frames at 30 Hz**.
 That batch used the CPU backend with eight virtual CPU devices; it was not a GPU run.
+Its original log recorded **18.3 s for BVH loading** and **14.000 s for IK,
+including 8.044 s compilation**. Loading plus IK was approximately 32.3 s.
+The log-file creation-to-final-write interval was **72.862 s (approximately
+73 s end to end)**, consistent with the recorded 39.936 s QA/export phase.
+This is a filesystem-timestamp approximation, not a dedicated process timer;
+14 s is only IK. These historical settings predate the collision-coverage fix.
+[Historical timing and provenance](benchmarks/predecessor_summary.json).
 That is a raw archive, not an all-pass benchmark. The historical walking profile
 selected **130 spans / 37,765 frames** (20.98 minutes), split by entire source clip:
 

@@ -4,7 +4,8 @@
 
 - Independent installable Q1 FRAX adapter with six command-line entry points.
 - Pinned upstream setup, contact-aware LAFAN targets and constrained batch IK.
-- Explicit CPU/CUDA backend selection and reproducible performance measurement.
+- CPU retargeting, truthful CUDA QP capability checks and reproducible timing.
+- Lazy rendering initialization so import and CLI help work without EGL.
 - Portable model generation with relative mesh paths and stable model hashes.
 - Float64 NPZ and lossless CSV export sharing the quality-check trajectory.
 - Full-frame geometry/tracking QA, versioned profile, rejection evidence and

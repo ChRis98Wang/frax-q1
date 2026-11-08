@@ -19,9 +19,11 @@ q1-frax-setup --with-lafan
 `Q1_FRAX_DATA` 或 setup 的 `--data-dir` 指定。不要把它指向正在训练的旧项目资源目录。
 只播放已有数据时安装 `.[visualization]` 即可，无需 JAX、FRAX、PyTorch 或 Isaac Lab。
 
-GPU 重定向另加 `cuda13` 安装选项，命令显式使用 `--platform cuda`。
-`--devices` 只用于 CPU 虚拟设备，不能当作 GPU 数量。GPU 不可用时程序会报错，
-不会偷偷改成 CPU 后仍报告 GPU 速度。CPU/GPU 实测条件和结果见仓库首页。
+当前固定版本的重定向仅支持 CPU。RTX 5080 上的 CUDA 13/JAX float64 已验证可用，
+但 `elastiqp==0.2.1` 只注册了 CPU 求解器，完整 FRAX GPU 求解会失败；加装 `cuda13`
+不能解决此限制。`--platform cuda` 用于能力诊断，不会降级为 CPU 后虚报 GPU 速度。
+`--devices` 只表示 CPU 虚拟设备数。实测 CPU 速度及 GPU 失败证据见首页与
+[测试说明](BENCHMARKING.md)。
 
 LAFAN 和机器人模型不随本仓库发布。先阅读 [上游许可说明](../THIRD_PARTY_NOTICES.md)。
 本地生成的动作、图片和视频默认不会进入 Git 发布内容。

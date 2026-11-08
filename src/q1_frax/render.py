@@ -6,20 +6,26 @@ import os
 from pathlib import Path
 import sys
 
-# Respect explicit backends. Native play imports this module only for --snapshot.
-if sys.platform.startswith("linux"):
-    os.environ.setdefault("MUJOCO_GL", "egl")
-
-import mujoco
 import numpy as np
 
 from .model import JOINT_NAMES, MJCF_PATH
 from .motion_io import guard_output_paths, load_motion, sha256, verify_motion_dependencies
-from .visuals import (CollisionColors, annotate, collision_summary, excluded_body_pairs,
-                      make_render_model, physical_contacts)
+
+
+def _load_render_runtime():
+    """Initialize graphics only when rendering is requested, never for --help."""
+    global mujoco, CollisionColors, annotate, collision_summary
+    global excluded_body_pairs, make_render_model, physical_contacts
+    # Respect a backend already selected by native play or an embedding program.
+    if "mujoco" not in sys.modules and sys.platform.startswith("linux"):
+        os.environ.setdefault("MUJOCO_GL", "egl")
+    import mujoco
+    from .visuals import (CollisionColors, annotate, collision_summary, excluded_body_pairs,
+                          make_render_model, physical_contacts)
 
 
 def load_model(path):
+    _load_render_runtime()
     model = mujoco.MjModel.from_xml_path(str(Path(path).expanduser().absolute()))
     names = [model.joint(j).name for j in range(model.njnt) if model.jnt_type[j] != mujoco.mjtJoint.mjJNT_FREE]
     if model.nq != 29 or names != list(JOINT_NAMES):
@@ -31,6 +37,7 @@ class ReferenceRenderer:
     """Keep an untouched physical model separate from all visual diagnostics."""
     def __init__(self, physical_model, motion, *, width=1280, height=900,
                  show_collision_geoms=False, show_link_labels=False, mark_self_collisions=True):
+        _load_render_runtime()
         self.physical_model, self.motion = physical_model, motion
         self.physical_data = mujoco.MjData(physical_model)
         self.model = make_render_model(physical_model)

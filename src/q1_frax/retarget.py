@@ -196,6 +196,42 @@ def configure_backend(platform="cpu", devices=None):
 
 
 
+
+class UnsupportedSolverBackend(RuntimeError):
+    """JAX supports the device, but the installed QP solver has no handler."""
+
+
+def check_solver_backend(runtime):
+    """Compile and execute a minimal QP on CUDA before touching output files."""
+    import elastiqp.jax
+    version=importlib.metadata.version("elastiqp")
+    metadata={"package":"elastiqp","version":version,"ffi_target":"elastiqp_solve"}
+    if runtime["jax_backend"]=="cpu":
+        return {**metadata,"backend":"cpu"}
+    import jax
+    import jax.numpy as jnp
+    import numpy as np
+    def probe():
+        return elastiqp.jax.solve(jnp.eye(1,dtype=jnp.float64),jnp.zeros(1,dtype=jnp.float64),
+                                 jnp.ones((1,1),dtype=jnp.float64),jnp.ones(1,dtype=jnp.float64),
+                                 jnp.ones(1,dtype=jnp.float64)).x
+    try:
+        result=jax.jit(probe).lower().compile()()
+        result=np.asarray(result)  # Synchronize execution, not only compilation.
+    except Exception as exc:
+        message=str(exc)
+        if "elastiqp_solve" in message and "FFI handler" in message:
+            raise UnsupportedSolverBackend(
+                f"ElastiQP {version} does not provide a CUDA FFI handler for elastiqp_solve. "
+                "JAX detected the requested GPU, but this locked FRAX QP backend supports CPU retargeting only. "
+                "Use --platform cpu; no CPU fallback was performed."
+            ) from exc
+        raise
+    if result.shape!=(1,) or not np.isfinite(result).all() or not np.allclose(result,0.,atol=1e-5):
+        raise RuntimeError("CUDA QP preflight returned an invalid solution")
+    return {**metadata,"backend":"cuda","minimal_qp_executed":True}
+
+
 def guard_output_directory(path):
     """Refuse sealed ancestors or output symlinks before creating/writing files."""
     path=Path(os.path.abspath(Path(path).expanduser()))
@@ -247,6 +283,7 @@ def main(argv=None):
         os.environ["Q1_FRAX_DATA"]=str(args.data_dir.expanduser().resolve())
     args.out=guard_output_directory(args.out)
     runtime=configure_backend(args.platform,args.devices)
+    runtime["qp_solver"]=check_solver_backend(runtime)
     import jax
     import jax.numpy as jnp
     import numpy as np
